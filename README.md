@@ -1,6 +1,6 @@
-# TODO - Your title
+# Transparency Tokens
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "Transparency Tokens".
 
 * [Editor's Copy](https://OR13.github.io/draft-steele-spice-transparency-tokens/#go.draft-steele-transparency-tokens.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-steele-transparency-tokens)
