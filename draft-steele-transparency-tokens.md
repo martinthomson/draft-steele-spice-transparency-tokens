@@ -37,13 +37,18 @@ normative:
   I-D.ietf-cose-typ-header-parameter: COSE-TYP
   I-D.ietf-cose-merkle-tree-proofs: COSE-VDP
   I-D.ietf-jose-json-web-proof: JOSE-JWP
+  I-D.ietf-oauth-selective-disclosure-jwt: SD-JWT
   I-D.ietf-oauth-sd-jwt-vc: SD-JWT-VC
 
   I-D.prorock-cose-sd-cwt: SD-CWT
 
+  RFC7519: JWT
+  RFC8392: CWT
+
 informative:
   RFC4949: SEC-v2
   RFC5755: ATTRIBUTE-CERTS
+  RFC8725: JWT-BCP
 
 
 
@@ -315,25 +320,182 @@ and challenged seek accountability to holders before all other parties.
 
 # Credential Workflows
 
+Credentials can be exchanged over differrent protocols.
+In this section we outline a few exemplar exchange scenarios, 
+however, this list is not exhaustive and some protocols might 
+define additional variations on these examples.
+
 ## Credential Delivery
+
+A subject will request a credential be created by an issuer, 
+or an issuer will create a credential for a subject.
+
+The next step requires the credential to be delivered to the subject, 
+so they can become a holder, and make presentations to verifiers.
+
+This workflow is commonly referred to as credential delivery.
 
 ## Presentation Delivery
 
+A holder will be challenged to present credentials to a verifier.
+
+It common for the verifier to specify the details of the credentials requested along with with nonce, 
+to prevent replay attacks.
+
+The holder will craft a presentation for the verifier, 
+possibly proving they control key material commited to be the issuer,
+by signing the nonce with a public key endorsed by the issuer.
+
+The holder will then transmit the presentation to the verifier.
+
+The verifier will check the signature from the issuer,
+the signature from the holder, and evaluate the nonce 
+and other time related data to determine if the presentation is valid.
+
 ## Credential Endorsement
+
+Some holder's may request a counter signature on an existing credential.
+
+This can help convince a verifier who is not familiar with a given issuer.
 
 ## Presentation Notarization
 
+Some holder's may request a receipt from a notary when making presentations.
+
+This can help them prove that a notary, or intermediary offering notarization
+had accepted a presentaton in the past.
+
 # Credential Formats
+
+A credential format combines a well known and popular serialization, such as JSON or CBOR,
+with a well known and popular securing capability, such as JOSE and COSE.
+
+Different serializations offer benefits over each other, but some terminology is so consistently needed, 
+that we see the same concepts emerging in each content type specific securing specifications.
+
+A good example is `iss` and `sub` which are popular in both JWT and CWT claims, and express the identifier of the issuer and the subject.
+
+Another is `alg` which expresses the cryptographic suite associated with providing the unforgable property of a credential.
+
+Another is `nbf` which expresses a time at which the statements made by the issuer become authoriative for the subject.
+
+Another is `exp` which expresses a time at which the statements made by the issuer cease being auuthoritative for the subject.
+
+Another is `cnf` which is a popular way to enable a holder to prove possession of a public key identity.
+
+Registries such as https://www.iana.org/assignments/cwt/cwt.xhtml and https://www.iana.org/assignments/jwt/jwt.xhtml
+
+over the ability for issuers, holders and verifiers to have unambious and well understood terminology, 
+but they cannot scale to express all the possible statements about the possible subjects, 
+in all the possible industry veriticals and contexts.
+
+Several competing solutions to this problem have emerged over time:
+
+1. collision-resistant-names
+
+In JSON, it is often recommended to prefix private claim names (names that are not registered), for example:
+
+~~~ json
+{
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+~~~
+{: #collision-resistant-names title="Example Collision-Resistant Name"}
+
+In this scenario, since "is_root" is a private claim, 
+and there is a risk that it might not be interpretted consistently, 
+or that there might be collisions, since it is not registered,
+it is prefixed with a URL.
+
+2. embedding type information
+
+The JWT BCP recomments to use explict typing to avoid similar looking tokens from being confused, 
+which could lead to faults in verification or processing. See {{-JWT-BCP}} section on explicit typing.
+
+~~~ json
+{
+  "typ": "application/cool+jwt",
+  "cty": "application/cool",
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+~~~
+{: #explict-typing title="Example Explict Typing"}
+
+3. embedding schema references
+
+A schema language can help provide a clear, unambigious name for certain shapes of data, or certain properties of data.
+
+In JSON, this can be accomplished with JSON Schema, or JSON-LD:
+
+~~~ json
+{
+  "@context": "https://ontology.provider.example/v4346",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+~~~
+{: #embbedded-schema title="Example Embedded Schema"}
+
+Another solution is to leverage knowledge about the protocol to reduce the need to communicate redundant information,
+for example, if unicorn-protocol only uses JWT or only uses CWT, 
+then signaling that a token is of these types is unnecessary.
+
+If the protocol grows to support new types in the future, a protocol specific parameter can be used remove ambiguity,
+or common solutions such as media types can be used to distinguish different kinds of statements and secure envelopes.
 
 ## CBOR Web Tokens
 
+CBOR Web Tokens are defined in {{-CWT}} and extended to support selective disclosure in {{-SD-CWT}}.
+
 ## JSON Web Tokens
+
+JSON Web Tokens are defined in {{-JWT}} and extended to support selective disclosure in {{-SD-JWT}}.
+
+## CBOR Web Proofs
+
+CBOR Web Proofs are defined in {{-JWP}} and extended to support credentials in this specification.
+
+## JSON Web Proofs
+
+JSON Web Proofs are defined in {{-JWP}} and extended to support credentials in this specification.
 
 # Credential Forms
 
+In order to be a well recognized digital credential, 
+there must be a specification defining the privacy and security properties of the format.
+
+The must be a registered media type which distinguishes the format from similar formats, for example:
+
+application/sd-jwt is different than application/jwt.
+
+There must be at least one way of extending the well known terminology associated with the credential format,
+to support industry use cases.
+
+The core operations of issuance, presentation and verification must be defined in a specification with privacy and security properties.
+
+There must be clear defintions of the forms of credentials supported by the format, 
+and the privacy and security considerations associated with each form.
+
 ## Issued Credential
 
+This form is produced by an issuer and delivered to a holder.
+
 ## Presented Credential
+
+This form is prepared by a holder and delivered to a verifier.
+
+In the simple case of credentials, this form is indistinguishable from the issued credential.
+
+In more privacy preserving forms, 
+this from reveals a subset of the information commited to by the issuer, 
+and possibly hides the identity of the subject in the process.
 
 
 # Security Considerations
