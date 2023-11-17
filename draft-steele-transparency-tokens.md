@@ -50,9 +50,9 @@ informative:
 --- abstract
 
 When professionals travel for business, they carry identity documents,
-such as passports or commercial drivers licenses,
+such as passports,
 employer related payment capabilites,
-such as corporate credit cards, or
+such as corporate credit cards, and
 security keys that might be used for both personal or professional reasons,
 such as hotel or car keys.
 
@@ -67,7 +67,7 @@ access and adoption of digital credentials, or exclude communities
 that require higher than normal privacy, sustainability, or availability guarantees.
 
 This specification describes a scallable solution to digital credentials,
-that is transport agnostic, privacy oriented,
+that is market friendly, transport agnostic, privacy oriented,
 and accountable to users of digital credentials above all other stake holders.
 
 --- middle
@@ -313,11 +313,28 @@ it will be due to the choices made by issuers and verifiers.
 Implementers should seek to frame the design of digital trust systems in terms of supporting the needs of holders,
 and challenged seek accountability to holders before all other parties.
 
+# Credential Workflows
+
+## Credential Delivery
+
+## Presentation Delivery
+
+## Credential Endorsement
+
+## Presentation Notarization
+
 # Credential Formats
 
-# Credential Types
+## CBOR Web Tokens
 
-# Workflows
+## JSON Web Tokens
+
+# Credential Forms
+
+## Issued Credential
+
+## Presented Credential
+
 
 # Security Considerations
 
