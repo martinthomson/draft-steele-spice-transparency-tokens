@@ -5,58 +5,57 @@ import { JWS } from '../jose'
 import { base64url } from 'jose'
 import { jsonToken } from '../encoding'
 
-export type IssuerOptions = {
-  issuerId: string
-  issuerKeyId: string
+export type EndorserOptions = {
+  endorserId: string
+  endorserKeyId: string
 
   tokenType: string
-  contentType: string
 
   secretKeyJwk?: any
   signer?:any
 }
 
-export type IssuanceOptions ={   
-  holderKey?: string
-  holderKeyId?: string, 
-  claimset: string, 
-  content: Buffer  
+export type CounterSignOptions ={   
+  claimset:string
+  issuedToken?: string
+  presentedToken?: string
 }
 
-export const issuer = (options: IssuerOptions) => {
+export const endorser = (options: EndorserOptions) => {
   // TODO: a real implementation goes here... 
   return {
-    issue: async ({  claimset, content, holderKeyId }: IssuanceOptions) => {
+    issue: async ({  issuedToken, presentedToken, claimset }: CounterSignOptions) => {
       if (options.secretKeyJwk){
         options.signer = await JWS.signer(options.secretKeyJwk)
       }
-      // TODO: support for SD stuff here...
+      const envelope = issuedToken !== undefined ? issuedToken : presentedToken as string
+      // TODO: drop unprotected header....
       const claimsObject = JSON.parse(JSON.stringify(yaml.parse(claimset)))
+
       const detachedPayloadJws = await options.signer.sign({
         protectedHeader: {
           alg: options.secretKeyJwk.alg,
           b64: false,
           crit: ["b64"],
-          kid: options.issuerKeyId,
+          kid: options.endorserKeyId,
           typ: options.tokenType,
-          cty: options.contentType,
           jwt_claims: {
-            cnf: {
-              kid: holderKeyId
-            },
             iat: Math.floor(Date.now() / 1000), // unix time stamp in seconds 
             _sd_hash_alg: 'sha-256',
             ...claimsObject
           }
         },
-        payload: content
+        payload: Buffer.from(envelope)
       })
-      const [protectedHeader, signature] = detachedPayloadJws.split('..')
-      return jsonToken.encode({
-        protected: protectedHeader,
-        unprotected: {},
-        signature
+      const envelopeJson = jsonToken.decode(envelope)
+      const envelopeWithCounterSignatures = jsonToken.encode({
+        ...envelopeJson,
+        unprotected: {
+          ...envelopeJson.unprotected,
+          counter_signatures: [detachedPayloadJws]
+        }
       })
+      return envelopeWithCounterSignatures
     }
   }
 }

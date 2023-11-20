@@ -15,6 +15,13 @@ describe("readme examples", () => {
     const holderId = 'https://subject.example/subjects/6320cb92-fffe-4538-8c82-2ad3b6e7fbf8'
     const holderKeyId = `${holderId}#${holderRole.publicKeyJwk.kid}`
 
+    const claimset =  `
+# issuer
+iss: ${issuerId}
+# subject
+sub: ${holderId}
+    `.trim()
+    
     const issuedToken = await tt
     .issuer({ 
       issuerId: issuerId, 
@@ -25,16 +32,11 @@ describe("readme examples", () => {
     })
     .issue({
       holderKeyId: holderKeyId,
-      claimset: `
-# issuer
-iss: ${issuerId}
-# subject
-sub: ${holderId}
-      `.trim(),
+      claimset: claimset,
       content: Buffer.from(`💧 Nature is the source of all true knowledge. 🌺`.trim())
     })
     const issuedTokenDiagnostic = tt.diagnose(issuedToken);
-    fs.writeFileSync('examples/issued_token.md', issuedTokenDiagnostic)
+    fs.writeFileSync('examples/sd_issued_token.md', issuedTokenDiagnostic)
 
     const presentedToken = await tt
     .holder({
@@ -50,7 +52,7 @@ sub: ${holderId}
     })
 
     const presentedTokenDiagnostic = tt.diagnose(presentedToken);
-    fs.writeFileSync('examples/presented_token.md', presentedTokenDiagnostic)
+    fs.writeFileSync('examples/sd_presented_token.md', presentedTokenDiagnostic)
 
   })
 });

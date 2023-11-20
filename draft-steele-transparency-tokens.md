@@ -587,9 +587,9 @@ application/sd-jwt is different than application/jwt.
 There must be at least one way of extending the well known terminology associated with the credential format,
 to support industry use cases.
 
-The core operations of issuance, presentation and verification must be defined in a specification with privacy and security properties.
+The core operations of issuance, presentation and verification must be defined in a specification with privacy and security considerations.
 
-There must be clear defintions of the forms of credentials supported by the format,
+There must be clear definitions of the forms of credentials supported by the format,
 and the privacy and security considerations associated with each form.
 
 ## Issued Credential

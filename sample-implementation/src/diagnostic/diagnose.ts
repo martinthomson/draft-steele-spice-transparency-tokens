@@ -2,15 +2,23 @@ import { base64url } from "jose"
 
 import { jsonToken } from "../encoding"
 
+const getSuffix = (data: any)=>{
+  if (data.unprotected.receipts){
+    return 'with Receipts'
+  }
+  return ''
+}
 
 const diagnoseIssuedToken =  (data: any) => {
   const decodedToken = jsonToken.decode(data)
   const decodedProtectedHeader = JSON.parse(new TextDecoder().decode(base64url.decode(decodedToken.protected)))
 
-  return `
-# Transparency Token
+  const suffix = getSuffix(decodedToken)
 
-## Issued Token
+  return `
+# Transparency Token 
+
+## Issued Token ${suffix}
 
 ### Protected Header
 
@@ -44,10 +52,14 @@ const diagnosePresentedToken =  (data: any) => {
   
   const decodedIssuedToken  = jsonToken.decode(decodedPresentedToken.unprotected.issued_token)
   const decodedIssuedProtectedHeader = JSON.parse(new TextDecoder().decode(base64url.decode(decodedIssuedToken.protected)))
-  return `
-# Transparency Token
 
-## Presented Token
+  const suffix1 = getSuffix(decodedPresentedToken)
+  const suffix2 = getSuffix(decodedIssuedToken)
+
+  return `
+# Transparency Token 
+
+## Presented Token ${suffix1}
 
 ### Protected Header
 
@@ -73,7 +85,7 @@ ${JSON.stringify(decodedPresentedToken, null, 2)}
 ${data}
 ~~~
 
-## Issued Token
+## Issued Token ${suffix2}
 
 ### Protected Header
 
