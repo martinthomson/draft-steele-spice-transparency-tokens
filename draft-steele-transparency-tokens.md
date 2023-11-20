@@ -474,14 +474,14 @@ Transparency Tokens build on lessons learned from deploying JWTs, CWTs and attri
 
 A major structural difference between transparency tokens and previous token formats is the opacity of statements (the use of opaque payloads).
 
-Opaque payloads allow for arbitrary content to be easily integrated in statements, 
-which enables issuers and verifiers to keep using serializations they are familar with, 
+Opaque payloads allow for arbitrary content to be easily integrated in statements,
+which enables issuers and verifiers to keep using serializations they are familar with,
 instead of mapping them to a new claims structure.
 
 For example, XML files can be signed and exchanged using JWS or COSE Sign 1 envelopes.
 
-Because transparency tokens secure payloads that are not required to be JSON objects or CBOR Maps, 
-it is best to think of them as a new kind of token.  
+Because transparency tokens secure payloads that are not required to be JSON objects or CBOR Maps,
+it is best to think of them as a new kind of token.
 
 Because the payload is opaque, it is common to play all the statement metadata in the protected header.
 
@@ -494,7 +494,7 @@ Transparency Token also recommend support for detached payloads, this allows for
 ### Redundant Claims
 
 In some cases, a JWT or CWT claim might be present in both the protected header and the payload.
-This can lead to protocol confusion vulnerabilities. 
+This can lead to protocol confusion vulnerabilities.
 The `typ` parameter MUST be used to distiniguish such tokens from similar looking tokens.
 
 ### Key Discovery
@@ -559,7 +559,7 @@ In JOSE, JWT claims go directly in the protected header.
 In COSE, CWT claims go in the CWT Claims map, which is placed inside the protected header.
 
 ~~~~ cbor-diag
-{ 
+{
   1: -35,                / Algorithm                     /
   13: {                  / CWT Claims                    /
     1: vendor.example,   / Issuer                        /
@@ -571,7 +571,7 @@ In COSE, CWT claims go in the CWT Claims map, which is placed inside the protect
 
 #### Fully Specified Algorithms
 
-Parametric algorithms MUST NOT be used. 
+Parametric algorithms MUST NOT be used.
 
 Algorithms MUST exist in both JOSE and COSE registries, and have the same security properties to be suitable for Transparency Tokens.
 
