@@ -466,6 +466,115 @@ CBOR Web Proofs are defined in {{-JWP}} and extended to support credentials in t
 
 JSON Web Proofs are defined in {{-JWP}} and extended to support credentials in this specification.
 
+## Transparency Tokens
+
+Transparency Tokens build on lessons learned from deploying JWTs, CWTs and attribute certificates.
+
+### Opaque Payloads
+
+A major structural difference between transparency tokens and previous token formats is the opacity of statements (the use of opaque payloads).
+
+Opaque payloads allow for arbitrary content to be easily integrated in statements, 
+which enables issuers and verifiers to keep using serializations they are familar with, 
+instead of mapping them to a new claims structure.
+
+For example, XML files can be signed and exchanged using JWS or COSE Sign 1 envelopes.
+
+Because transparency tokens secure payloads that are not required to be JSON objects or CBOR Maps, 
+it is best to think of them as a new kind of token.  
+
+Because the payload is opaque, it is common to play all the statement metadata in the protected header.
+
+In cases where selective disclosure or zero knowledge proofs need to be applied, this specification extends the related work to enable these capabilies over protected header metadata.
+
+### Detached Payloads
+
+Transparency Token also recommend support for detached payloads, this allows for easier integration with protocols that already transport well known content types, such as HTTP or file systems that support directory and file structures such as UNIX.
+
+### Redundant Claims
+
+In some cases, a JWT or CWT claim might be present in both the protected header and the payload.
+This can lead to protocol confusion vulnerabilities. 
+The `typ` parameter MUST be used to distiniguish such tokens from similar looking tokens.
+
+### Key Discovery
+
+Editors note: consider moving out of scope.
+
+As a general rule, any well defined `typ` values SHOULD describe the available key discovery mechanisms.
+
+As a best practice the protected header should be the only location a verifier needs to look for hints related to discovering verification or decryption keys.
+
+The following fields are commonly used to discovery verification material: `iss`, `kid`, `jwk`, `cnf`.
+
+### Mutable Claims
+
+The unprotected header provides a useful extension point, but requires careful consideration, due to the lack of built in integrity checking.
+
+Common uses for the unprotected header include:
+
+- adding counter signatures
+- adding transparency receipts
+- disclosing redacted commitments
+- providing proofs of knowledge
+
+### Identifiers
+
+JOSE and COSE have claims that are need to be text, but could be strings or URIs.
+
+Transparency tokens do not require these fields to be URIs.
+
+As a general preference, these fields should be a small as possible, and avoid transmitting information that is redundant to either:
+
+1. the protocol specification (https can be ommmited when its known to be required...)
+2. other protected claims (`kid` and `sub` can be relative to `iss`, if your `typ` says so...)
+
+### Architectural Alignment
+
+Transparency Tokens require some consistency in functionality between JOSE and COSE.
+
+Editors note: consider focusing only on COSE.
+
+In order to enable similar experience, while leveraging existing RFCs, the following structural changes and recommendations have been made.
+
+In cases where a break in conventions needs to be made, Transparency Tokens prioritize CBOR / COSE over JSON / JOSE.
+
+#### Unprotected headers
+
+JOSE Compact and JSON serializations have been extended to support an unprotected header.
+
+#### Claims in headers
+
+In JOSE, JWT claims go directly in the protected header.
+
+~~~ json
+{
+  "alg": "ES384",
+  "iss": "vendor.example",
+  "sub": "service.example"
+}
+~~~
+{: #jose-claims-in-headers title="Example JOSE Claims in Headers"}
+
+In COSE, CWT claims go in the CWT Claims map, which is placed inside the protected header.
+
+~~~~ cbor-diag
+{ 
+  1: -35,                / Algorithm                     /
+  13: {                  / CWT Claims                    /
+    1: vendor.example,   / Issuer                        /
+    2: service.example,  / Subject                       /
+  },
+}
+~~~~
+{: #cose-claims-in-headers title="Example COSE Claims in Headers"}
+
+#### Fully Specified Algorithms
+
+Parametric algorithms MUST NOT be used. 
+
+Algorithms MUST exist in both JOSE and COSE registries, and have the same security properties to be suitable for Transparency Tokens.
+
 # Credential Forms
 
 In order to be a well recognized digital credential,
