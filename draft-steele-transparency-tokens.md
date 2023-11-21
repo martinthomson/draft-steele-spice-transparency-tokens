@@ -460,11 +460,11 @@ JSON Web Tokens are defined in {{-JWT}} and extended to support selective disclo
 
 ## CBOR Web Proofs
 
-CBOR Web Proofs are defined in {{-JWP}} and extended to support credentials in this specification.
+CBOR Web Proofs are defined in {{-JOSE-JWP}} and extended to support credentials in this specification.
 
 ## JSON Web Proofs
 
-JSON Web Proofs are defined in {{-JWP}} and extended to support credentials in this specification.
+JSON Web Proofs are defined in {{-JOSE-JWP}} and extended to support credentials in this specification.
 
 ## Transparency Tokens
 
@@ -518,7 +518,7 @@ Common uses for the unprotected header include:
 - disclosing redacted commitments
 - providing proofs of knowledge
 
-### Identifiers
+### Entity Identifiers
 
 JOSE and COSE have claims that are need to be text, but could be strings or URIs.
 
