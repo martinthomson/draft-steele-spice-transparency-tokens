@@ -536,7 +536,7 @@ so that issuer's can have confidence in the key material that digital credential
 
 In order to accomplish this, the app developer needs both RATS Evidence and a RATS Endorsement.
 
-By presenting both evidence and endorsement associated with a private key to an issuer, the issuer can be convinced that 
+By presenting both evidence and endorsement associated with a private key to an issuer, the issuer can be convinced that
 the digital credential store has the necessary security properties to hold high value credentials.
 
 
