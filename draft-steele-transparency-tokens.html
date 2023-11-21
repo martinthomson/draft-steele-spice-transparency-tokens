@@ -7,12 +7,31 @@
 <title>Transparency Tokens</title>
 <meta content="Orie Steele" name="author">
 <meta content="
-       TODO Abstract 
+       When professionals travel for business, they carry identity documents,
+such as passports,
+employer related payment capabilites,
+such as corporate credit cards, and
+security keys that might be used for both personal or professional reasons,
+such as hotel or car keys. 
+       These credentials might be stored in a purse, briefcase or wallet. 
+       Digital storage systems struggle to support the various credential formats,
+physical proximity and remote presentation protocols,
+and assurance capabilities needed to enable international business. 
+       Device capabilities, cost and power consumption can preclude
+access and adoption of digital credentials, or exclude communities
+that require higher than normal privacy, sustainability, or availability guarantees. 
+       This specification describes a scallable solution to digital credentials,
+that is market friendly, transport agnostic, privacy oriented,
+and accountable to users of digital credentials above all other stake holders. 
     " name="description">
 <meta content="xml2rfc 3.18.2" name="generator">
-<meta content="next generation" name="keyword">
-<meta content="unicorn" name="keyword">
-<meta content="sparkling distributed ledger" name="keyword">
+<meta content="Internet-Draft" name="keyword">
+<meta content="cose" name="keyword">
+<meta content="jose" name="keyword">
+<meta content="transparency" name="keyword">
+<meta content="selective disclosure" name="keyword">
+<meta content="unlinkability" name="keyword">
+<meta content="untraceability" name="keyword">
 <meta content="draft-steele-transparency-tokens-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.18.2
@@ -22,13 +41,13 @@
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.0.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.31.0
     setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.9
+    wcwidth 0.2.10
 -->
 <link href="draft-steele-transparency-tokens.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1031,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Steele</td>
-<td class="center">Expires 19 May 2024</td>
+<td class="center">Expires 24 May 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-steele-transparency-tokens-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-11-16" class="published">16 November 2023</time>
+<time datetime="2023-11-21" class="published">21 November 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Informational</dd>
+<dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-05-19">19 May 2024</time></dd>
+<dd class="expires"><time datetime="2024-05-24">24 May 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1062,7 +1081,22 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Transparency Tokens</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">When professionals travel for business, they carry identity documents,
+such as passports,
+employer related payment capabilites,
+such as corporate credit cards, and
+security keys that might be used for both personal or professional reasons,
+such as hotel or car keys.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">These credentials might be stored in a purse, briefcase or wallet.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">Digital storage systems struggle to support the various credential formats,
+physical proximity and remote presentation protocols,
+and assurance capabilities needed to enable international business.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-4">Device capabilities, cost and power consumption can preclude
+access and adoption of digital credentials, or exclude communities
+that require higher than normal privacy, sustainability, or availability guarantees.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
+<p id="section-abstract-5">This specification describes a scallable solution to digital credentials,
+that is market friendly, transport agnostic, privacy oriented,
+and accountable to users of digital credentials above all other stake holders.<a href="#section-abstract-5" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1072,8 +1106,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-note.1-2">
         The latest revision of this draft can be found at <span><a href="https://OR13.github.io/draft-steele-spice-transparency-tokens/draft-steele-transparency-tokens.html">https://OR13.github.io/draft-steele-spice-transparency-tokens/draft-steele-transparency-tokens.html</a></span>.
         Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-steele-transparency-tokens/">https://datatracker.ietf.org/doc/draft-steele-transparency-tokens/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
-<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/OR13/draft-steele-spice-transparency-tokens">https://github.com/OR13/draft-steele-spice-transparency-tokens</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Secure Patterns for Internet CrEdentials (spice) Working Group mailing list (<span><a href="mailto:spice@ietf.org">mailto:spice@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/spice/">https://mailarchive.ietf.org/arch/browse/spice/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/spice/">https://www.ietf.org/mailman/listinfo/spice/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/OR13/draft-steele-spice-transparency-tokens">https://github.com/OR13/draft-steele-spice-transparency-tokens</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1094,7 +1133,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 May 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 May 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1127,22 +1166,130 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-diversity-is-a-feature" class="internal xref">Diversity is a Feature</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-credential-roles" class="internal xref">Credential Roles</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-credential-principles" class="internal xref">Credential Principles</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-autonomy" class="internal xref">Autonomy</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-confidentiality" class="internal xref">Confidentiality</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-anonymity" class="internal xref">Anonymity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-authenticity" class="internal xref">Authenticity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-transparency" class="internal xref">Transparency</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-accountability" class="internal xref">Accountability</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-credential-workflows" class="internal xref">Credential Workflows</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-credential-delivery" class="internal xref">Credential Delivery</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-presentation-delivery" class="internal xref">Presentation Delivery</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-credential-endorsement" class="internal xref">Credential Endorsement</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-presentation-notarization" class="internal xref">Presentation Notarization</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-credential-formats" class="internal xref">Credential Formats</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-cbor-web-tokens" class="internal xref">CBOR Web Tokens</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-json-web-tokens" class="internal xref">JSON Web Tokens</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-cbor-web-proofs" class="internal xref">CBOR Web Proofs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-json-web-proofs" class="internal xref">JSON Web Proofs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-transparency-tokens" class="internal xref">Transparency Tokens</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.1">
+                    <p id="section-toc.1-1.7.2.5.2.1.1"><a href="#section-7.5.1" class="auto internal xref">7.5.1</a>.  <a href="#name-opaque-payloads" class="internal xref">Opaque Payloads</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.2">
+                    <p id="section-toc.1-1.7.2.5.2.2.1"><a href="#section-7.5.2" class="auto internal xref">7.5.2</a>.  <a href="#name-detached-payloads" class="internal xref">Detached Payloads</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.3">
+                    <p id="section-toc.1-1.7.2.5.2.3.1"><a href="#section-7.5.3" class="auto internal xref">7.5.3</a>.  <a href="#name-redundant-claims" class="internal xref">Redundant Claims</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.4">
+                    <p id="section-toc.1-1.7.2.5.2.4.1"><a href="#section-7.5.4" class="auto internal xref">7.5.4</a>.  <a href="#name-key-discovery" class="internal xref">Key Discovery</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.5">
+                    <p id="section-toc.1-1.7.2.5.2.5.1"><a href="#section-7.5.5" class="auto internal xref">7.5.5</a>.  <a href="#name-mutable-claims" class="internal xref">Mutable Claims</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.6">
+                    <p id="section-toc.1-1.7.2.5.2.6.1"><a href="#section-7.5.6" class="auto internal xref">7.5.6</a>.  <a href="#name-entity-identifiers" class="internal xref">Entity Identifiers</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.7">
+                    <p id="section-toc.1-1.7.2.5.2.7.1"><a href="#section-7.5.7" class="auto internal xref">7.5.7</a>.  <a href="#name-architectural-alignment" class="internal xref">Architectural Alignment</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-credential-forms" class="internal xref">Credential Forms</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-issued-credential" class="internal xref">Issued Credential</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-presented-credential" class="internal xref">Presented Credential</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1153,59 +1300,782 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The "Complaint tablet to Ea-nāṣir" is considered to be the oldest known written complaint.
+The tablet was written in Akkadian cuneiform, by a customer named Nanni to a merchant named Ea-nāṣir.
+The complaint describes how Ea-nāṣir had agreed to sell copper ingots to Nanni, via Nanni's unnamed servant,
+but the ingots were considered sub standard and were not accepted. Nanni created the complaint letter
+for delivery to Ea-nāṣir to explain that the copper was not the correct grade, that his servant was treated poorly,
+and that at the time of writing, he had not accepted the copper, but had paid for it.
+Search for the wikipedia article for the full story.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Although humanity has moved on from clay tablets, to paper, to byte streams on the internet,
+some business challenges have remained the same.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Travel is dangerous and expensive.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">The properties of the products we purchase,
+do not always match the properties that were advertised.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">There is a need to delegate negotiation to trusted intermediaries,
+while convincing counter parties that the intermediary is authorized to complete the transaction.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">There is a need to ensure that intermediaries do not tamper with the sale price
+or technical specification of the product.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">And there is a need to provide transparency regarding supply chain activities,
+so that consumers and businesses can make informed decisions regarding products and the known risks associated with them, as this information changes over time.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">If Nanni and Ea-nāṣir had transparency tokens, their trade would have been frictionless, and we would all be without the first written use case expressing the concept of credentials.<a href="#section-1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="conventions-and-definitions">
+<div id="diversity-is-a-feature">
 <section id="section-2">
-      <h2 id="name-conventions-and-definitions">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      <h2 id="name-diversity-is-a-feature">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-diversity-is-a-feature" class="section-name selfRef">Diversity is a Feature</a>
       </h2>
-<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-2-1">Modern paper credentials come in many different shapes and sizes, from notary stamped paper documents with wet ink signatures,
+to ASN.1 and X.509 signed XML documents representing commercial invoices.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">New formats are created to address the challenges and shortcoming of the formats that came before. Clay tablets were heavy, paper is easily destroyed, XML Signatures were expensive to compute and error prone, JSON while readable and writable by humans was wasteful of compute and storage when processed by machines.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">CBOR stands on the shoulders of giants, having benefitted from being created last, and suffering for being less well adopted than XML and JSON.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">It is natural to wish for there to be only one format, for digital credentials, as this would improve interoperability and reduce the costs associated with verifying credentials as part of business transactions, but nature does not produce discrete steps in technology deployment. Horses and automobiles shared the streets of cities in the early 19th century, and XML, ASN.1, JSON and CBOR will coexist so long as business requires them too.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">There are advantages to having multiple formats for digital credentials, particular when attempting to give privacy or security benefits to users that depend on specific protocols, that are only able to handle certain credential formats. For example, OAuth and OpenID Connect tend to require JSON claimsets and JWT credential formats.<a href="#section-2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-3">
+      <h2 id="name-terminology">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-3-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">To the best of our ability we reuse terminology from <span>[<a href="#RFC4949" class="cite xref">RFC4949</a>]</span>.
+For clarity, we provide more specific definitions when necessary.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3-3">
+        <dt id="section-3-3.1">principle:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.2">
+          <p id="section-3-3.2.1">A specific identity claimed by an entity when accessing a system.<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.3">identity:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.4">
+          <p id="section-3-3.4.1">The collective aspect of a set of attribute values (i.e., a
+set of characteristics) by which a system entity is recognizable or known.<a href="#section-3-3.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.5">identifier:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.6">
+          <p id="section-3-3.6.1">A data object -- often, a printable, non-blank character
+string -- that definitively represents a specific identity of a
+system entity, distinguishing that identity from all others.<a href="#section-3-3.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.7">issuer:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.8">
+          <p id="section-3-3.8.1">An identifier representing an entity that makes statements.<a href="#section-3-3.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.9">statement:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.10">
+          <p id="section-3-3.10.1">A definite or clear expression of something;
+a judgement, opinion, attribute, predicate or proposition regarding a subject.<a href="#section-3-3.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.11">subject:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.12">
+          <p id="section-3-3.12.1">An identifier representing the entity being discussed, described or attributed.<a href="#section-3-3.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.13">holder:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.14">
+          <p id="section-3-3.14.1">An identifier representing an entity which knows or possesses statements.<a href="#section-3-3.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.15">verifier:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.16">
+          <p id="section-3-3.16.1">An identifer representing an entity which reviews, checks or confirms statements.<a href="#section-3-3.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.17">credential:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.18">
+          <p id="section-3-3.18.1">A token (usually an unforgeable data object)
+that is a portable representation of the association between an
+identifier and a unit of authentication information, or statement
+and that can be presented by a holder.<a href="#section-3-3.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.19">presentation:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.20">
+          <p id="section-3-3.20.1">The activity a holder performs when transmiting a credential to a verifier.<a href="#section-3-3.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.21">notary:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.22">
+          <p id="section-3-3.22.1">Provides a trusted timestamp for a document, so that
+someone can later prove that the document existed at that point in
+time; verifies the signature(s) on a signed document before
+applying the stamp.<a href="#section-3-3.22.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.23">receipt:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.24">
+          <p id="section-3-3.24.1">A token (usually an unforgeable data object)
+proving that notarization has taken place.<a href="#section-3-3.24.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.25">counter signature:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.26">
+          <p id="section-3-3.26.1">A token (usually an unforgeable data object)
+proving that a second issuer, has seen a credential from a first issuer.<a href="#section-3-3.26.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.27">mediator:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.28">
+          <p id="section-3-3.28.1">A party that provides a transmission capability that protects
+the confidentiality or presentations made by holders.<a href="#section-3-3.28.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="credential-roles">
+<section id="section-4">
+      <h2 id="name-credential-roles">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-credential-roles" class="section-name selfRef">Credential Roles</a>
+      </h2>
+<p id="section-4-1">Credentials are essential to the efficient function of principles,
+be they natural persons or legal entities.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Throughout their lifetime, a principle might create many identifiers,
+and these identifiers may be known to fulfill the various
+roles associated with digital credentials.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">These roles include being the issuer of statements about a subject,
+being the subject of statements made by issuers,
+holding credentials regarding identifiers for the principle,
+holding credentials regarding identifiers for other principles,
+presenting credentials to verifiers, or receiving presentations from other holders.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">The same entity may play all these roles,
+but for the sake of clarity we usually refer to interactions
+where each distinct entity playes a specific role in a workflow.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">The canonical example is:<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-6">An issuer makes statements about a subject and produces an unforgable token as the issued credential.
+The issuer transmits the issued credential to a holder.
+A verifier requests a credential be presented.
+The holder derives a presentable form of the issued credential, called the presented credential.
+The holder transmits the presented credential to a verifier.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-7">There are auxillary roles which are special cases of the issuer, holder or verifier which are common
+in scenarious requiring additional assurance or confidentiality.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-8">In cases where the issuer, or holder lacks credibility,
+a countersignature or endorsement from a more reputatible entity
+might be required to convince a warry verifier.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">In cases where the issuer or holder might rotate verification keys frequently,
+or where the issuer or holder might not be well known to a verifier,
+a receipt from a notary can provide assurance to the verifier.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10">In cases where a holder requires untraceability or is required
+to provide confidentiality regarding the provenance of a credential,
+delegation with or without attenutation to intermediate, or mediators holders, may be necessary.<a href="#section-4-10" class="pilcrow">¶</a></p>
+<p id="section-4-11">Notaries and mediators can leverage receipts and counter signatures to adjust the transparency,
+traceability and confidentiality associated with credentials.<a href="#section-4-11" class="pilcrow">¶</a></p>
+<p id="section-4-12">Giving unique and meaningful names to these roles,
+allows for digital trust systems to optimize for the properties that are most needed for credential use cases.<a href="#section-4-12" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-principles">
+<section id="section-5">
+      <h2 id="name-credential-principles">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-credential-principles" class="section-name selfRef">Credential Principles</a>
+      </h2>
+<p id="section-5-1">Identification happens before we recognize threat or opportunity.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Digital credentials are tools but like most tools,
+access and authority to use them are controlled by social,
+economic and political factors.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Because this technology has the potential to adversly impact the freedom
+and inalienable rights of human beings, and healthy competition of legal entities,
+we state these principles of digital credentials,
+but caution that not all these properties can be easily achieved without sacrifice,
+and where some principles may be appropriatly degraded for legal entities,
+other principles ought to be preserved for natural persons.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<div id="autonomy">
+<section id="section-5.1">
+        <h3 id="name-autonomy">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-autonomy" class="section-name selfRef">Autonomy</a>
+        </h3>
+<p id="section-5.1-1">Issuers reserve the right to make statements.
+Holders reserve the right to present credentials.
+Verifiers reserve the right to reject presentation.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Issuers may be subject to local, regional or global laws regarding statements.
+Holders might be denied service, if they are unwilling to present credentials.
+Verifiers might be subject to legal action for rejecting presentations in ways that violate local laws.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">When developing digital credential technology,
+consideration should be given to allow these roles to perform their function,
+with respect to local culture and conventions.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">Globally compelling behavior reduces the value of digital reputation over time,
+and degrades the ability of individual entities to provide better security and privacy properties,
+by applying least privledge and minimal disclosure.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="confidentiality">
+<section id="section-5.2">
+        <h3 id="name-confidentiality">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-confidentiality" class="section-name selfRef">Confidentiality</a>
+        </h3>
+<p id="section-5.2-1">All information should be considered sensitive, including timing,
+transmission metadata, the social graph that is built between issuers, subjects, holders and verifiers,
+and of course the content of statements.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">All encryption has a shelf life, these signals should be protected with cryptography
+appropriate for maintaining confidentiality for as long as is necessary to prevent harm.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="anonymity">
+<section id="section-5.3">
+        <h3 id="name-anonymity">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-anonymity" class="section-name selfRef">Anonymity</a>
+        </h3>
+<p id="section-5.3-1">The act of observation changes the outcome, and character is what you do when nobody is watching.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">These technologies can be used to erode the abilty to create unlinkable digital identifiers,
+which are necessary for maintaining distinct digital identities.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">At the same time, these technologies can be used to create unlinkable digital identifers,
+which can be used in ways that are unpredictable.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">When designing digital trust systems, implementers should be cautious to preserve anonymity when it is essential,<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authenticity">
+<section id="section-5.4">
+        <h3 id="name-authenticity">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-authenticity" class="section-name selfRef">Authenticity</a>
+        </h3>
+<p id="section-5.4-1">Perhaps the most essential property of digital credentials is assuring that statements can be made unforgable.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">Verifiers require this property to be able to make use of presentations from holders,
+with confidence that the holder is not able to tamper with or alter the statements made by issuers.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">This property also applies to the act of presenting by the holder.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">Assurance regarding the capabilities of the holder's device, or other evidence regarding
+the presence or awareness of the holder can be essential to convincing a verifier to accept a presentation.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4-5">See FIDO, etc...<a href="#section-5.4-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="transparency">
+<section id="section-5.5">
+        <h3 id="name-transparency">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-transparency" class="section-name selfRef">Transparency</a>
+        </h3>
+<p id="section-5.5-1">Transparency does not mean lack of confidentiality, it means commiting to be honest, in a way that dishonesty can be detected.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-2">This property is essential to service providers who maintain public key to identity bindings such as the work describes in key transparency.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
+<p id="section-5.5-3">This property is also essential to statements about artifacts or ingredients that are assembled into more complex structures,
+so that is a problem in a sub component is detected, the potential damage can be mitigated, and the relying parties can be notified
+to protect their systems from cascading faults.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="accountability">
+<section id="section-5.6">
+        <h3 id="name-accountability">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-accountability" class="section-name selfRef">Accountability</a>
+        </h3>
+<p id="section-5.6-1">Of the various credential roles, holders and subjects are most vulnerable, and have the least power or incentive to adopt digital credential systems.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-2">Issuers and verifiers have great power and responsibility, and in cases where holders might not have the
+choices regarding credential storage, credential transmission, privacy and security features or the principles above,
+it will be due to the choices made by issuers and verifiers.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+<p id="section-5.6-3">Implementers should seek to frame the design of digital trust systems in terms of supporting the needs of holders,
+and challenged seek accountability to holders before all other parties.<a href="#section-5.6-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="credential-workflows">
+<section id="section-6">
+      <h2 id="name-credential-workflows">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-credential-workflows" class="section-name selfRef">Credential Workflows</a>
+      </h2>
+<p id="section-6-1">Credentials can be exchanged over differrent protocols.
+In this section we outline a few exemplar exchange scenarios,
+however, this list is not exhaustive and some protocols might
+define additional variations on these examples.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<div id="credential-delivery">
+<section id="section-6.1">
+        <h3 id="name-credential-delivery">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-credential-delivery" class="section-name selfRef">Credential Delivery</a>
+        </h3>
+<p id="section-6.1-1">A subject will request a credential be created by an issuer,
+or an issuer will create a credential for a subject.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The next step requires the credential to be delivered to the subject,
+so they can become a holder, and make presentations to verifiers.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">This workflow is commonly referred to as credential delivery.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-delivery">
+<section id="section-6.2">
+        <h3 id="name-presentation-delivery">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-presentation-delivery" class="section-name selfRef">Presentation Delivery</a>
+        </h3>
+<p id="section-6.2-1">A holder will be challenged to present credentials to a verifier.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">It common for the verifier to specify the details of the credentials requested along with with nonce,
+to prevent replay attacks.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The holder will craft a presentation for the verifier,
+possibly proving they control key material commited to be the issuer,
+by signing the nonce with a public key endorsed by the issuer.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">The holder will then transmit the presentation to the verifier.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">The verifier will check the signature from the issuer,
+the signature from the holder, and evaluate the nonce
+and other time related data to determine if the presentation is valid.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-endorsement">
+<section id="section-6.3">
+        <h3 id="name-credential-endorsement">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-credential-endorsement" class="section-name selfRef">Credential Endorsement</a>
+        </h3>
+<p id="section-6.3-1">Some holder's may request a counter signature on an existing credential.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">This can help convince a verifier who is not familiar with a given issuer.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-notarization">
+<section id="section-6.4">
+        <h3 id="name-presentation-notarization">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-presentation-notarization" class="section-name selfRef">Presentation Notarization</a>
+        </h3>
+<p id="section-6.4-1">Some holder's may request a receipt from a notary when making presentations.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">This can help them prove that a notary, or intermediary offering notarization
+had accepted a presentaton in the past.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="credential-formats">
+<section id="section-7">
+      <h2 id="name-credential-formats">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-credential-formats" class="section-name selfRef">Credential Formats</a>
+      </h2>
+<p id="section-7-1">A credential format combines a well known and popular serialization, such as JSON or CBOR,
+with a well known and popular securing capability, such as JOSE and COSE.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Different serializations offer benefits over each other, but some terminology is so consistently needed,
+that we see the same concepts emerging in each content type specific securing specifications.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">A good example is <code>iss</code> and <code>sub</code> which are popular in both JWT and CWT claims, and express the identifier of the issuer and the subject.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">Another is <code>alg</code> which expresses the cryptographic suite associated with providing the unforgable property of a credential.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">Another is <code>nbf</code> which expresses a time at which the statements made by the issuer become authoriative for the subject.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">Another is <code>exp</code> which expresses a time at which the statements made by the issuer cease being auuthoritative for the subject.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">Another is <code>cnf</code> which is a popular way to enable a holder to prove possession of a public key identity.<a href="#section-7-7" class="pilcrow">¶</a></p>
+<p id="section-7-8">Registries such as https://www.iana.org/assignments/cwt/cwt.xhtml and https://www.iana.org/assignments/jwt/jwt.xhtml<a href="#section-7-8" class="pilcrow">¶</a></p>
+<p id="section-7-9">over the ability for issuers, holders and verifiers to have unambious and well understood terminology,
+but they cannot scale to express all the possible statements about the possible subjects,
+in all the possible industry veriticals and contexts.<a href="#section-7-9" class="pilcrow">¶</a></p>
+<p id="section-7-10">Several competing solutions to this problem have emerged over time:<a href="#section-7-10" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7-11">
+<li id="section-7-11.1">
+          <p id="section-7-11.1.1">collision-resistant-names<a href="#section-7-11.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-7-12">In JSON, it is often recommended to prefix private claim names (names that are not registered), for example:<a href="#section-7-12" class="pilcrow">¶</a></p>
+<span id="name-example-collision-resistant"></span><div id="collision-resistant-names">
+<figure id="figure-1">
+        <div class="lang-json sourcecode" id="section-7-13.1">
+<pre>
+{
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-example-collision-resistant" class="selfRef">Example Collision-Resistant Name</a>
+        </figcaption></figure>
+</div>
+<p id="section-7-14">In this scenario, since "is_root" is a private claim,
+and there is a risk that it might not be interpretted consistently,
+or that there might be collisions, since it is not registered,
+it is prefixed with a URL.<a href="#section-7-14" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7-15">
+<li id="section-7-15.1">
+          <p id="section-7-15.1.1">embedding type information<a href="#section-7-15.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-7-16">The JWT BCP recomments to use explict typing to avoid similar looking tokens from being confused,
+which could lead to faults in verification or processing. See <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span> section on explicit typing.<a href="#section-7-16" class="pilcrow">¶</a></p>
+<span id="name-example-explict-typing"></span><div id="explict-typing">
+<figure id="figure-2">
+        <div class="lang-json sourcecode" id="section-7-17.1">
+<pre>
+{
+  "typ": "application/cool+jwt",
+  "cty": "application/cool",
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-example-explict-typing" class="selfRef">Example Explict Typing</a>
+        </figcaption></figure>
+</div>
+<ol start="1" type="1" class="normal type-1" id="section-7-18">
+<li id="section-7-18.1">
+          <p id="section-7-18.1.1">embedding schema references<a href="#section-7-18.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-7-19">A schema language can help provide a clear, unambigious name for certain shapes of data, or certain properties of data.<a href="#section-7-19" class="pilcrow">¶</a></p>
+<p id="section-7-20">In JSON, this can be accomplished with JSON Schema, or JSON-LD:<a href="#section-7-20" class="pilcrow">¶</a></p>
+<span id="name-example-embedded-schema"></span><div id="embbedded-schema">
+<figure id="figure-3">
+        <div class="lang-json sourcecode" id="section-7-21.1">
+<pre>
+{
+  "@context": "https://ontology.provider.example/v4346",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "iss": "joe",
+  "exp": 1300819380,
+  "http://example.com/is_root":true
+}
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-embedded-schema" class="selfRef">Example Embedded Schema</a>
+        </figcaption></figure>
+</div>
+<p id="section-7-22">Another solution is to leverage knowledge about the protocol to reduce the need to communicate redundant information,
+for example, if unicorn-protocol only uses JWT or only uses CWT,
+then signaling that a token is of these types is unnecessary.<a href="#section-7-22" class="pilcrow">¶</a></p>
+<p id="section-7-23">If the protocol grows to support new types in the future, a protocol specific parameter can be used remove ambiguity,
+or common solutions such as media types can be used to distinguish different kinds of statements and secure envelopes.<a href="#section-7-23" class="pilcrow">¶</a></p>
+<div id="cbor-web-tokens">
+<section id="section-7.1">
+        <h3 id="name-cbor-web-tokens">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-cbor-web-tokens" class="section-name selfRef">CBOR Web Tokens</a>
+        </h3>
+<p id="section-7.1-1">CBOR Web Tokens are defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> and extended to support selective disclosure in <span>[<a href="#I-D.prorock-cose-sd-cwt" class="cite xref">I-D.prorock-cose-sd-cwt</a>]</span>.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="json-web-tokens">
+<section id="section-7.2">
+        <h3 id="name-json-web-tokens">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-json-web-tokens" class="section-name selfRef">JSON Web Tokens</a>
+        </h3>
+<p id="section-7.2-1">JSON Web Tokens are defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> and extended to support selective disclosure in <span>[<a href="#I-D.ietf-oauth-selective-disclosure-jwt" class="cite xref">I-D.ietf-oauth-selective-disclosure-jwt</a>]</span>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="cbor-web-proofs">
+<section id="section-7.3">
+        <h3 id="name-cbor-web-proofs">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-cbor-web-proofs" class="section-name selfRef">CBOR Web Proofs</a>
+        </h3>
+<p id="section-7.3-1">CBOR Web Proofs are defined in <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span> and extended to support credentials in this specification.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="json-web-proofs">
+<section id="section-7.4">
+        <h3 id="name-json-web-proofs">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-json-web-proofs" class="section-name selfRef">JSON Web Proofs</a>
+        </h3>
+<p id="section-7.4-1">JSON Web Proofs are defined in <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span> and extended to support credentials in this specification.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="transparency-tokens">
+<section id="section-7.5">
+        <h3 id="name-transparency-tokens">
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-transparency-tokens" class="section-name selfRef">Transparency Tokens</a>
+        </h3>
+<p id="section-7.5-1">Transparency Tokens build on lessons learned from deploying JWTs, CWTs and attribute certificates.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
+<div id="opaque-payloads">
+<section id="section-7.5.1">
+          <h4 id="name-opaque-payloads">
+<a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-opaque-payloads" class="section-name selfRef">Opaque Payloads</a>
+          </h4>
+<p id="section-7.5.1-1">A major structural difference between transparency tokens and previous token formats is the opacity of statements (the use of opaque payloads).<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-2">Opaque payloads allow for arbitrary content to be easily integrated in statements,
+which enables issuers and verifiers to keep using serializations they are familar with,
+instead of mapping them to a new claims structure.<a href="#section-7.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-3">For example, XML files can be signed and exchanged using JWS or COSE Sign 1 envelopes.<a href="#section-7.5.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-4">Because transparency tokens secure payloads that are not required to be JSON objects or CBOR Maps,
+it is best to think of them as a new kind of token.<a href="#section-7.5.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-5">Because the payload is opaque, it is common to play all the statement metadata in the protected header.<a href="#section-7.5.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.5.1-6">In cases where selective disclosure or zero knowledge proofs need to be applied, this specification extends the related work to enable these capabilies over protected header metadata.<a href="#section-7.5.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="detached-payloads">
+<section id="section-7.5.2">
+          <h4 id="name-detached-payloads">
+<a href="#section-7.5.2" class="section-number selfRef">7.5.2. </a><a href="#name-detached-payloads" class="section-name selfRef">Detached Payloads</a>
+          </h4>
+<p id="section-7.5.2-1">Transparency Token also recommend support for detached payloads, this allows for easier integration with protocols that already transport well known content types, such as HTTP or file systems that support directory and file structures such as UNIX.<a href="#section-7.5.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="redundant-claims">
+<section id="section-7.5.3">
+          <h4 id="name-redundant-claims">
+<a href="#section-7.5.3" class="section-number selfRef">7.5.3. </a><a href="#name-redundant-claims" class="section-name selfRef">Redundant Claims</a>
+          </h4>
+<p id="section-7.5.3-1">In some cases, a JWT or CWT claim might be present in both the protected header and the payload.
+This can lead to protocol confusion vulnerabilities.
+The <code>typ</code> parameter <span class="bcp14">MUST</span> be used to distiniguish such tokens from similar looking tokens.<a href="#section-7.5.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-discovery">
+<section id="section-7.5.4">
+          <h4 id="name-key-discovery">
+<a href="#section-7.5.4" class="section-number selfRef">7.5.4. </a><a href="#name-key-discovery" class="section-name selfRef">Key Discovery</a>
+          </h4>
+<p id="section-7.5.4-1">Editors note: consider moving out of scope.<a href="#section-7.5.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.4-2">As a general rule, any well defined <code>typ</code> values <span class="bcp14">SHOULD</span> describe the available key discovery mechanisms.<a href="#section-7.5.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.5.4-3">As a best practice the protected header should be the only location a verifier needs to look for hints related to discovering verification or decryption keys.<a href="#section-7.5.4-3" class="pilcrow">¶</a></p>
+<p id="section-7.5.4-4">The following fields are commonly used to discovery verification material: <code>iss</code>, <code>kid</code>, <code>jwk</code>, <code>cnf</code>.<a href="#section-7.5.4-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mutable-claims">
+<section id="section-7.5.5">
+          <h4 id="name-mutable-claims">
+<a href="#section-7.5.5" class="section-number selfRef">7.5.5. </a><a href="#name-mutable-claims" class="section-name selfRef">Mutable Claims</a>
+          </h4>
+<p id="section-7.5.5-1">The unprotected header provides a useful extension point, but requires careful consideration, due to the lack of built in integrity checking.<a href="#section-7.5.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.5-2">Common uses for the unprotected header include:<a href="#section-7.5.5-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.5.5-3.1">
+              <p id="section-7.5.5-3.1.1">adding counter signatures<a href="#section-7.5.5-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.5.5-3.2">
+              <p id="section-7.5.5-3.2.1">adding transparency receipts<a href="#section-7.5.5-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.5.5-3.3">
+              <p id="section-7.5.5-3.3.1">disclosing redacted commitments<a href="#section-7.5.5-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.5.5-3.4">
+              <p id="section-7.5.5-3.4.1">providing proofs of knowledge<a href="#section-7.5.5-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="entity-identifiers">
+<section id="section-7.5.6">
+          <h4 id="name-entity-identifiers">
+<a href="#section-7.5.6" class="section-number selfRef">7.5.6. </a><a href="#name-entity-identifiers" class="section-name selfRef">Entity Identifiers</a>
+          </h4>
+<p id="section-7.5.6-1">JOSE and COSE have claims that are need to be text, but could be strings or URIs.<a href="#section-7.5.6-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.6-2">Transparency tokens do not require these fields to be URIs.<a href="#section-7.5.6-2" class="pilcrow">¶</a></p>
+<p id="section-7.5.6-3">As a general preference, these fields should be a small as possible, and avoid transmitting information that is redundant to either:<a href="#section-7.5.6-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.5.6-4">
+<li id="section-7.5.6-4.1">
+              <p id="section-7.5.6-4.1.1">the protocol specification (https can be ommmited when its known to be required...)<a href="#section-7.5.6-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.5.6-4.2">
+              <p id="section-7.5.6-4.2.1">other protected claims (<code>kid</code> and <code>sub</code> can be relative to <code>iss</code>, if your <code>typ</code> says so...)<a href="#section-7.5.6-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+</section>
+</div>
+<div id="architectural-alignment">
+<section id="section-7.5.7">
+          <h4 id="name-architectural-alignment">
+<a href="#section-7.5.7" class="section-number selfRef">7.5.7. </a><a href="#name-architectural-alignment" class="section-name selfRef">Architectural Alignment</a>
+          </h4>
+<p id="section-7.5.7-1">Transparency Tokens require some consistency in functionality between JOSE and COSE.<a href="#section-7.5.7-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.7-2">Editors note: consider focusing only on COSE.<a href="#section-7.5.7-2" class="pilcrow">¶</a></p>
+<p id="section-7.5.7-3">In order to enable similar experience, while leveraging existing RFCs, the following structural changes and recommendations have been made.<a href="#section-7.5.7-3" class="pilcrow">¶</a></p>
+<p id="section-7.5.7-4">In cases where a break in conventions needs to be made, Transparency Tokens prioritize CBOR / COSE over JSON / JOSE.<a href="#section-7.5.7-4" class="pilcrow">¶</a></p>
+<div id="unprotected-headers">
+<section id="section-7.5.7.1">
+            <h5 id="name-unprotected-headers">
+<a href="#section-7.5.7.1" class="section-number selfRef">7.5.7.1. </a><a href="#name-unprotected-headers" class="section-name selfRef">Unprotected headers</a>
+            </h5>
+<p id="section-7.5.7.1-1">JOSE Compact and JSON serializations have been extended to support an unprotected header.<a href="#section-7.5.7.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="claims-in-headers">
+<section id="section-7.5.7.2">
+            <h5 id="name-claims-in-headers">
+<a href="#section-7.5.7.2" class="section-number selfRef">7.5.7.2. </a><a href="#name-claims-in-headers" class="section-name selfRef">Claims in headers</a>
+            </h5>
+<p id="section-7.5.7.2-1">In JOSE, JWT claims go directly in the protected header.<a href="#section-7.5.7.2-1" class="pilcrow">¶</a></p>
+<span id="name-example-jose-claims-in-head"></span><div id="jose-claims-in-headers">
+<figure id="figure-4">
+              <div class="lang-json sourcecode" id="section-7.5.7.2-2.1">
+<pre>
+{
+  "alg": "ES384",
+  "iss": "vendor.example",
+  "sub": "service.example"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-jose-claims-in-head" class="selfRef">Example JOSE Claims in Headers</a>
+              </figcaption></figure>
+</div>
+<p id="section-7.5.7.2-3">In COSE, CWT claims go in the CWT Claims map, which is placed inside the protected header.<a href="#section-7.5.7.2-3" class="pilcrow">¶</a></p>
+<span id="name-example-cose-claims-in-head"></span><div id="cose-claims-in-headers">
+<figure id="figure-5">
+              <div class="lang-cbor-diag sourcecode" id="section-7.5.7.2-4.1">
+<pre>
+{
+  1: -35,                / Algorithm                     /
+  13: {                  / CWT Claims                    /
+    1: vendor.example,   / Issuer                        /
+    2: service.example,  / Subject                       /
+  },
+}
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-example-cose-claims-in-head" class="selfRef">Example COSE Claims in Headers</a>
+              </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="fully-specified-algorithms">
+<section id="section-7.5.7.3">
+            <h5 id="name-fully-specified-algorithms">
+<a href="#section-7.5.7.3" class="section-number selfRef">7.5.7.3. </a><a href="#name-fully-specified-algorithms" class="section-name selfRef">Fully Specified Algorithms</a>
+            </h5>
+<p id="section-7.5.7.3-1">Parametric algorithms <span class="bcp14">MUST NOT</span> be used.<a href="#section-7.5.7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.5.7.3-2">Algorithms <span class="bcp14">MUST</span> exist in both JOSE and COSE registries, and have the same security properties to be suitable for Transparency Tokens.<a href="#section-7.5.7.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="credential-forms">
+<section id="section-8">
+      <h2 id="name-credential-forms">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-credential-forms" class="section-name selfRef">Credential Forms</a>
+      </h2>
+<p id="section-8-1">In order to be a well recognized digital credential,
+there must be a specification defining the privacy and security properties of the format.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">The must be a registered media type which distinguishes the format from similar formats, for example:<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">application/sd-jwt is different than application/jwt.<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">There must be at least one way of extending the well known terminology associated with the credential format,
+to support industry use cases.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-5">The core operations of issuance, presentation and verification must be defined in a specification with privacy and security considerations.<a href="#section-8-5" class="pilcrow">¶</a></p>
+<p id="section-8-6">There must be clear definitions of the forms of credentials supported by the format,
+and the privacy and security considerations associated with each form.<a href="#section-8-6" class="pilcrow">¶</a></p>
+<div id="issued-credential">
+<section id="section-8.1">
+        <h3 id="name-issued-credential">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-issued-credential" class="section-name selfRef">Issued Credential</a>
+        </h3>
+<p id="section-8.1-1">This form is produced by an issuer and delivered to a holder.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presented-credential">
+<section id="section-8.2">
+        <h3 id="name-presented-credential">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-presented-credential" class="section-name selfRef">Presented Credential</a>
+        </h3>
+<p id="section-8.2-1">This form is prepared by a holder and delivered to a verifier.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-2">In the simple case of credentials, this form is indistinguishable from the issued credential.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.2-3">In more privacy preserving forms,
+this from reveals a subset of the information commited to by the issuer,
+and possibly hides the identity of the subject in the process.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-3">
+<section id="section-9">
       <h2 id="name-security-considerations">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-3-1">TODO Security<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">TODO Security<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-4">
+<section id="section-10">
       <h2 id="name-iana-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-4-1">This document has no IANA actions.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">This document has no IANA actions.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="sec-normative-references">
-<section id="section-5">
-      <h2 id="name-normative-references">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<section id="section-11">
+      <h2 id="name-references">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
+<section id="section-11.1">
+        <h3 id="name-normative-references">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
 <dl class="references">
+<dt id="I-D.ietf-cose-cwt-claims-in-headers">[I-D.ietf-cose-cwt-claims-in-headers]</dt>
+        <dd>
+<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims in COSE Headers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cwt-claims-in-headers-09</span>, <time datetime="2023-11-10" class="refDate">10 November 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cwt-claims-in-headers-09">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cwt-claims-in-headers-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-cose-merkle-tree-proofs">[I-D.ietf-cose-merkle-tree-proofs]</dt>
+        <dd>
+<span class="refAuthor">Steele, O.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, and <span class="refAuthor">C. Fournet</span>, <span class="refTitle">"Concise Encoding of Signed Merkle Tree Proofs"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-merkle-tree-proofs-02</span>, <time datetime="2023-11-17" class="refDate">17 November 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-merkle-tree-proofs-02">https://datatracker.ietf.org/doc/html/draft-ietf-cose-merkle-tree-proofs-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-cose-typ-header-parameter">[I-D.ietf-cose-typ-header-parameter]</dt>
+        <dd>
+<span class="refAuthor">Jones, M. B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"COSE "typ" (type) Header Parameter"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-typ-header-parameter-01</span>, <time datetime="2023-11-07" class="refDate">7 November 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-01">https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-jose-json-web-proof">[I-D.ietf-jose-json-web-proof]</dt>
+        <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Waite, D.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"JSON Web Proof"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-web-proof-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-oauth-sd-jwt-vc">[I-D.ietf-oauth-sd-jwt-vc]</dt>
+        <dd>
+<span class="refAuthor">Terbu, O.</span> and <span class="refAuthor">D. Fett</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-01</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-01">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-oauth-selective-disclosure-jwt">[I-D.ietf-oauth-selective-disclosure-jwt]</dt>
+        <dd>
+<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"Selective Disclosure for JWTs (SD-JWT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-selective-disclosure-jwt-06</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-privacypass-architecture">[I-D.ietf-privacypass-architecture]</dt>
+        <dd>
+<span class="refAuthor">Davidson, A.</span>, <span class="refAuthor">Iyengar, J.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"The Privacy Pass Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-privacypass-architecture-16</span>, <time datetime="2023-09-25" class="refDate">25 September 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-architecture-16">https://datatracker.ietf.org/doc/html/draft-ietf-privacypass-architecture-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.prorock-cose-sd-cwt">[I-D.prorock-cose-sd-cwt]</dt>
+        <dd>
+<span class="refAuthor">Prorock, M.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"Selective Disclosure CWTs (SD-CWT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-prorock-cose-sd-cwt-01</span>, <time datetime="2023-08-31" class="refDate">31 August 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-prorock-cose-sd-cwt-01">https://datatracker.ietf.org/doc/html/draft-prorock-cose-sd-cwt-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7519">https://www.rfc-editor.org/rfc/rfc7519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
+<div id="sec-informative-references">
+<section id="section-11.2">
+        <h3 id="name-informative-references">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC4949">[RFC4949]</dt>
+        <dd>
+<span class="refAuthor">Shirey, R.</span>, <span class="refTitle">"Internet Security Glossary, Version 2"</span>, <span class="seriesInfo">FYI 36</span>, <span class="seriesInfo">RFC 4949</span>, <span class="seriesInfo">DOI 10.17487/RFC4949</span>, <time datetime="2007-08" class="refDate">August 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4949">https://www.rfc-editor.org/rfc/rfc4949</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5755">[RFC5755]</dt>
+        <dd>
+<span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"An Internet Attribute Certificate Profile for Authorization"</span>, <span class="seriesInfo">RFC 5755</span>, <span class="seriesInfo">DOI 10.17487/RFC5755</span>, <time datetime="2010-01" class="refDate">January 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5755">https://www.rfc-editor.org/rfc/rfc5755</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+      <dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8725">https://www.rfc-editor.org/rfc/rfc8725</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
 <div id="acknowledgments">
 <section id="appendix-A">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">TODO acknowledge.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The following individuals provided input into the final form of the document:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-2.1">
+          <p id="appendix-A-2.1.1">Ea-nāṣir<a href="#appendix-A-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-2.2">
+          <p id="appendix-A-2.2.1">Nanni<a href="#appendix-A-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="authors-addresses">
