@@ -529,6 +529,18 @@ As a general preference, these fields should be a small as possible, and avoid t
 1. the protocol specification (https can be ommmited when its known to be required...)
 2. other protected claims (`kid` and `sub` can be relative to `iss`, if your `typ` says so...)
 
+### Trusted Hardware
+
+Application developers need the ability to communciate the assurances associated with a harware and software platform such as iOS and Android,
+so that issuer's can have confidence in the key material that digital credentials will be bound too.
+
+In order to accomplish this, the app developer needs both RATS Evidence and a RATS Endorsement.
+
+By presenting both evidence and endorsement associated with a private key to an issuer, the issuer can be convinced that 
+the digital credential store has the necessary security properties to hold high value credentials.
+
+
+
 ### Architectural Alignment
 
 Transparency Tokens require some consistency in functionality between JOSE and COSE.
