@@ -114,7 +114,8 @@ Table of Contents
        7.5.4.  Key Discovery
        7.5.5.  Mutable Claims
        7.5.6.  Entity Identifiers
-       7.5.7.  Architectural Alignment
+       7.5.7.  Trusted Hardware
+       7.5.8.  Architectural Alignment
    8.  Credential Forms
      8.1.  Issued Credential
      8.2.  Presented Credential
@@ -687,7 +688,22 @@ Table of Contents
    2.  other protected claims (kid and sub can be relative to iss, if
        your typ says so...)
 
-7.5.7.  Architectural Alignment
+7.5.7.  Trusted Hardware
+
+   Application developers need the ability to communciate the assurances
+   associated with a harware and software platform such as iOS and
+   Android, so that issuer's can have confidence in the key material
+   that digital credentials will be bound too.
+
+   In order to accomplish this, the app developer needs both RATS
+   Evidence and a RATS Endorsement.
+
+   By presenting both evidence and endorsement associated with a private
+   key to an issuer, the issuer can be convinced that the digital
+   credential store has the necessary security properties to hold high
+   value credentials.
+
+7.5.8.  Architectural Alignment
 
    Transparency Tokens require some consistency in functionality between
    JOSE and COSE.
@@ -701,12 +717,12 @@ Table of Contents
    In cases where a break in conventions needs to be made, Transparency
    Tokens prioritize CBOR / COSE over JSON / JOSE.
 
-7.5.7.1.  Unprotected headers
+7.5.8.1.  Unprotected headers
 
    JOSE Compact and JSON serializations have been extended to support an
    unprotected header.
 
-7.5.7.2.  Claims in headers
+7.5.8.2.  Claims in headers
 
    In JOSE, JWT claims go directly in the protected header.
 
@@ -731,7 +747,7 @@ Table of Contents
 
                   Figure 5: Example COSE Claims in Headers
 
-7.5.7.3.  Fully Specified Algorithms
+7.5.8.3.  Fully Specified Algorithms
 
    Parametric algorithms MUST NOT be used.
 
