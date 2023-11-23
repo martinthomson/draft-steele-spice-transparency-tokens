@@ -50,23 +50,23 @@ from the green web foundation.
 ~~~~ cbor-diag
 {                                   / COSE Key                      /
   1: 2,                             / Type                          /
-  2: h'6c376d79...64444a63',        / Identifier                    /
+  2: h'49796277...764e6277',        / Identifier                    /
   3: -35,                           / Algorithm                     /
   -1: 2,                            / Curve                         /
-  -2: h'7e1ef641...18c4283e',       / x public key component        /
-  -3: h'c9750a2e...1212463b',       / y public key component        /
+  -2: h'29606e38...ff8fc79f',       / x public key component        /
+  -3: h'd8e3fd4c...867a87ad',       / y public key component        /
 }
 ~~~~
 
 ### JOSE
 ~~~~ json
 {
-  "kid": "l7myqqZc06PEp2JIr0L8Vn6pyMVwyQQicACHpjVdDJc",
+  "kid": "Iybwusy_q_2jVYzF9CE0iE1AjFiCmrnPCgCdw3AvNbw",
   "kty": "EC",
   "crv": "P-384",
   "alg": "ES384",
-  "x": "fh72QaFCOsZU3GfkgBgYMpd0jfngl_w1hKy5GY_w4WYsECgPwh3how5ExaAYxCg-",
-  "y": "yXUKLr8fSLL45HiyKCci4rHbIi7-NUiRup9rW-3x6eaUoYXK8cnGMgFNcs8SEkY7"
+  "x": "KWBuOPMcvn_eWrpTHLv3FuQXoAwwe9ZxBBgdRlAIFhlUfXtT06JjuoqS_nv_j8ef",
+  "y": "2OP9THVTZ2-0Qgr0yTBP31tj5zk-KU-bl3wdpA6F4ddfVxdGjZCXffsOw--Geoet"
 }
 ~~~~
   
@@ -82,7 +82,7 @@ from the green web foundation.
       h'a1013822',                  / Protected                     /
       {},                           / Unprotected                   /
       h'8508fb3f...60000400',       / Payload                       /
-      h'cab42445...fff9e1b5'        / Signature                     /
+      h'6d09410a...55796c0c'        / Signature                     /
     ]
 )
 ~~~~
@@ -98,7 +98,7 @@ from the green web foundation.
 [8, 0.01_3, 0.5_2, -1261461178, [h'85184d070b084e1002840081004800140060000400']]
 ~~~~
 
-## Inclusion Log Filter
+##### Inclusion Log Filter
 ~~~~ cbor-diag
 [77, 7, 11, 8, h'1002840081004800140060000400']
 ~~~~
@@ -107,7 +107,7 @@ from the green web foundation.
 
 #### Inclusion Receipt
 ~~~~ text
-eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemUiOjgsIl9lcnJvcl9yYXRlIjowLjAxLCJfcmF0aW8iOjAuNSwiX2ZpbHRlcnMiOlt7Il9zaXplIjo3NywiX25iSGFzaGVzIjo3LCJfbSI6MTEsIl9maWx0ZXIiOiJFQUtFQUlFQVNBQVVBR0FBQkFBPSIsIl9jYXBhY2l0eSI6OH1dLCJfc2VlZCI6LTEyNjE0NjExNzh9.ZnYPAycAPq7vDb3cTjy9ISTLD2qUL19nzzKfopw9EWQ--PjaAGoAUO-awkbs1KGvbXuy_xEt6ReWpEj9zUjwqitOkAVMSO0k6qFTl6xxbTy16yl8zRRCN5DsT-Fei7Vn
+eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemUiOjgsIl9lcnJvcl9yYXRlIjowLjAxLCJfcmF0aW8iOjAuNSwiX2ZpbHRlcnMiOlt7Il9zaXplIjo3NywiX25iSGFzaGVzIjo3LCJfbSI6MTEsIl9maWx0ZXIiOiJFQUtFQUlFQVNBQVVBR0FBQkFBPSIsIl9jYXBhY2l0eSI6OH1dLCJfc2VlZCI6LTEyNjE0NjExNzh9.vG5gGHp4uVlMgtnzM5k5zNw8ERcjjS6eOXnFLXs3bu3FXApxkdY-_nnGPVtsLAPu_kKfk3G6tf4OO2ktgRO9QcmbF7KSgcOIGqK3gwBHnkLwOMSHjxuUy_PPJerTWtfS
 ~~~~
 
 #### Inclusion Log
@@ -144,7 +144,7 @@ eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemU
       h'a1013822',                  / Protected                     /
       {},                           / Unprotected                   /
       h'853a4b30...00000000',       / Payload                       /
-      h'44ca0b3e...975ea809'        / Signature                     /
+      h'7bfbedeb...4e8b1039'        / Signature                     /
     ]
 )
 ~~~~
@@ -164,7 +164,7 @@ eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemU
 
 #### Status Receipt
 ~~~~ text
-eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiWG9yRmlsdGVyIiwiX2ZpbHRlciI6IkFBQUFBQUFBQUFCclJRQUFBQUFBQUFBQWpaRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJfYml0cyI6MTYsIl9zaXplIjoyLCJfYmxvY2tMZW5ndGgiOjExLCJfc2VlZCI6LTEyNjE0NjExNzh9.rbIzPi1-ge27Lfg5xZ6ZkbVT-PoBY39yrJ576BnozG8cTAxqOK5lF73Fq9ygzT20Slz6X8W4EjNVS9oBPETYRUhV6c_dMdbJyV6du1z1rA8omtROy3bLaEhA6l1P8K5A
+eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiWG9yRmlsdGVyIiwiX2ZpbHRlciI6IkFBQUFBQUFBQUFCclJRQUFBQUFBQUFBQWpaRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJfYml0cyI6MTYsIl9zaXplIjoyLCJfYmxvY2tMZW5ndGgiOjExLCJfc2VlZCI6LTEyNjE0NjExNzh9.xnrmwK1lh4LgWmXUIfToIbPbhCr2WwDwQJ0lEp3tEzuYZUUAQSREnZIT4sjf5ovtxuUAu7VG9ierlSx6AtHFXmS3RuVlhI-1Hn9A1CjZMroaCcFgRnK40xPboXDEh3o8
 ~~~~
 
 #### Status Log

@@ -58,7 +58,7 @@ ${await cose.scitt.receipt.edn(inclusionCose)}
 ${logDiag.trim()}
 ~~~~
 
-## Inclusion Log Filter
+##### Inclusion Log Filter
 ~~~~ cbor-diag
 ${filterDiag.trim()}
 ~~~~
