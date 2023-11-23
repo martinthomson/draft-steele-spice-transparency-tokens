@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-21T00:09:41.418584+00:00",
+  "timestamp": "2023-11-23T00:09:35.381287+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -49,6 +49,38 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOKuZz1s53mnQe",
+      "title": "Why rotating keys often benefits from a TS might need a good ref on key rotation",
+      "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/issues/1",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": ">In cases where the issuer or holder might rotate verification keys frequently, or where the issuer or holder might not be well known to a verifier, a receipt from a notary can provide assurance to the verifier.\r\n\r\n@OR13 highlighted that key rotation might not be the perfect term, but the NIST glossary definition fits:\r\n\r\n`https://csrc.nist.gov/glossary/term/key_rotation`\r\n\r\nThen adding a few sentences about bcp on key management from SP.800p2 and cite the source could do the trick:\r\n\r\n`\r\nhttps://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt2r1.pdf`",
+      "createdAt": "2023-11-22T15:41:09Z",
+      "updatedAt": "2023-11-22T15:57:05Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "NONE",
+          "body": "@cabo pointed out cryptoperiods in NIST SP 800.\r\n\r\nCryptoperiods:\r\n```\r\nIf a key is retained indefinitely for operational use (e.g., for encryption, decryption, or signing), the probability that\r\nthe key will become known through cryptanalysis, technical probing, malware, carelessness, or other methods\r\nincreases over time. Depending on the criticality, volume, or perishability of the information being protected,\r\nlonger or shorter operational lifetimes may be established for cryptographic keys. Some private-sector\r\norganizations neither change key variables and/or certificates nor make provision for users to change the keys\r\nand/or certificates. This is not recommended if the information has any privacy or security value. Ideally, an\r\norganization controls cryptoperiod determinations for the keys that protect its information.\r\n```",
+          "createdAt": "2023-11-22T15:54:20Z",
+          "updatedAt": "2023-11-22T15:54:20Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "OWNER",
+          "body": "We should use the word \"rotation\" so that people searching for it find \"cryptoperiods\"... and then say.\r\n\r\nThe term \"key rotation\" typically implies establishing reasonable cryptoperiods, and not reusing any keys which have expired.",
+          "createdAt": "2023-11-22T15:57:04Z",
+          "updatedAt": "2023-11-22T15:57:04Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
