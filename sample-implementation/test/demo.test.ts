@@ -221,7 +221,7 @@ from the green web foundation.
   markdown += `
 ## View Source
 
-- [demo.test.ts](https://github.com/OR13/draft-steele-spice-transparency-tokens/blob/main/test/demo.test.ts)
+- [demo.test.ts](https://github.com/OR13/draft-steele-spice-transparency-tokens/blob/main/sample-implementation/test/demo.test.ts)
   `
   fs.writeFileSync('examples/c02-bloom-jose-cose.md', markdown)
 

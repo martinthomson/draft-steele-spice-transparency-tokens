@@ -50,23 +50,23 @@ from the green web foundation.
 ~~~~ cbor-diag
 {                                   / COSE Key                      /
   1: 2,                             / Type                          /
-  2: h'49796277...764e6277',        / Identifier                    /
+  2: h'4c4b4b57...53503177',        / Identifier                    /
   3: -35,                           / Algorithm                     /
   -1: 2,                            / Curve                         /
-  -2: h'29606e38...ff8fc79f',       / x public key component        /
-  -3: h'd8e3fd4c...867a87ad',       / y public key component        /
+  -2: h'c61d2422...069e2599',       / x public key component        /
+  -3: h'e52d77a9...eaa74a35',       / y public key component        /
 }
 ~~~~
 
 ### JOSE
 ~~~~ json
 {
-  "kid": "Iybwusy_q_2jVYzF9CE0iE1AjFiCmrnPCgCdw3AvNbw",
+  "kid": "LKKWhiPQzgSyCrai54SSceWCAQAKQwkoruD019WSP1w",
   "kty": "EC",
   "crv": "P-384",
   "alg": "ES384",
-  "x": "KWBuOPMcvn_eWrpTHLv3FuQXoAwwe9ZxBBgdRlAIFhlUfXtT06JjuoqS_nv_j8ef",
-  "y": "2OP9THVTZ2-0Qgr0yTBP31tj5zk-KU-bl3wdpA6F4ddfVxdGjZCXffsOw--Geoet"
+  "x": "xh0kIn2xmFgBUHMQexRAyg_U5xMxctuI0gL7AXqJofGolObrpcOuvSR5j4UGniWZ",
+  "y": "5S13qVQGsGBHyxlZPygr4qzSay_yhLZhCo9JH_DscVN0G0TQvM5yTCNAX2jqp0o1"
 }
 ~~~~
   
@@ -82,7 +82,7 @@ from the green web foundation.
       h'a1013822',                  / Protected                     /
       {},                           / Unprotected                   /
       h'8508fb3f...60000400',       / Payload                       /
-      h'6d09410a...55796c0c'        / Signature                     /
+      h'fec5669e...fc0ae68e'        / Signature                     /
     ]
 )
 ~~~~
@@ -107,7 +107,7 @@ from the green web foundation.
 
 #### Inclusion Receipt
 ~~~~ text
-eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemUiOjgsIl9lcnJvcl9yYXRlIjowLjAxLCJfcmF0aW8iOjAuNSwiX2ZpbHRlcnMiOlt7Il9zaXplIjo3NywiX25iSGFzaGVzIjo3LCJfbSI6MTEsIl9maWx0ZXIiOiJFQUtFQUlFQVNBQVVBR0FBQkFBPSIsIl9jYXBhY2l0eSI6OH1dLCJfc2VlZCI6LTEyNjE0NjExNzh9.vG5gGHp4uVlMgtnzM5k5zNw8ERcjjS6eOXnFLXs3bu3FXApxkdY-_nnGPVtsLAPu_kKfk3G6tf4OO2ktgRO9QcmbF7KSgcOIGqK3gwBHnkLwOMSHjxuUy_PPJerTWtfS
+eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemUiOjgsIl9lcnJvcl9yYXRlIjowLjAxLCJfcmF0aW8iOjAuNSwiX2ZpbHRlcnMiOlt7Il9zaXplIjo3NywiX25iSGFzaGVzIjo3LCJfbSI6MTEsIl9maWx0ZXIiOiJFQUtFQUlFQVNBQVVBR0FBQkFBPSIsIl9jYXBhY2l0eSI6OH1dLCJfc2VlZCI6LTEyNjE0NjExNzh9.IXJQGDNr22jx9VlPpjeNKNFxWeN1xEr5sovVjlCDZQos595qAJI4hFJDzv6GACIZw2yyrsYyvz-Sc6No94UFONGFT4_8hg9I5zuvJDQUwcm82n6Pzj3r3g2uUvuIdcgs
 ~~~~
 
 #### Inclusion Log
@@ -144,7 +144,7 @@ eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemU
       h'a1013822',                  / Protected                     /
       {},                           / Unprotected                   /
       h'853a4b30...00000000',       / Payload                       /
-      h'7bfbedeb...4e8b1039'        / Signature                     /
+      h'fe062f76...a5a66fa3'        / Signature                     /
     ]
 )
 ~~~~
@@ -164,7 +164,7 @@ eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiU2NhbGFibGVCbG9vbUZpbHRlciIsIl9pbml0aWFsX3NpemU
 
 #### Status Receipt
 ~~~~ text
-eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiWG9yRmlsdGVyIiwiX2ZpbHRlciI6IkFBQUFBQUFBQUFCclJRQUFBQUFBQUFBQWpaRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJfYml0cyI6MTYsIl9zaXplIjoyLCJfYmxvY2tMZW5ndGgiOjExLCJfc2VlZCI6LTEyNjE0NjExNzh9.xnrmwK1lh4LgWmXUIfToIbPbhCr2WwDwQJ0lEp3tEzuYZUUAQSREnZIT4sjf5ovtxuUAu7VG9ierlSx6AtHFXmS3RuVlhI-1Hn9A1CjZMroaCcFgRnK40xPboXDEh3o8
+eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiWG9yRmlsdGVyIiwiX2ZpbHRlciI6IkFBQUFBQUFBQUFCclJRQUFBQUFBQUFBQWpaRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJfYml0cyI6MTYsIl9zaXplIjoyLCJfYmxvY2tMZW5ndGgiOjExLCJfc2VlZCI6LTEyNjE0NjExNzh9.UcqJLMMlvGPcdrj6m256fcKDDN6iAhClN0NSzPWpEjHta3HcXzDdPf3hswDv0Wk3smGVCN_OdHEDyCiA0ZyP9F7r7iTOF_Fpv40WGAS8r2HrFUmDLSCYZ4XRF8n8raqG
 ~~~~
 
 #### Status Log
@@ -182,5 +182,5 @@ eyJhbGciOiJFUzM4NCJ9.eyJ0eXBlIjoiWG9yRmlsdGVyIiwiX2ZpbHRlciI6IkFBQUFBQUFBQUFCclJ
 
 ## View Source
 
-- [demo.test.ts](https://github.com/OR13/draft-steele-spice-transparency-tokens/blob/main/test/demo.test.ts)
+- [demo.test.ts](https://github.com/OR13/draft-steele-spice-transparency-tokens/blob/main/sample-implementation/test/demo.test.ts)
   
