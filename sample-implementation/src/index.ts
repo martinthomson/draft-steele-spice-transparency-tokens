@@ -8,4 +8,6 @@ import { endorser } from './endorser'
 
 import * as encoding from './encoding'
 
-export const tt = { jose, encoding, diagnose, issuer, holder, notary, endorser }
+import * as bloom from './bloom'
+
+export const tt = { bloom, jose, encoding, diagnose, issuer, holder, notary, endorser }
