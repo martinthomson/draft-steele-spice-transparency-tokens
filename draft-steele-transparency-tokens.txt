@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        21 November 2023
-Expires: 24 May 2024
+Intended status: Standards Track                        23 November 2023
+Expires: 26 May 2024
 
 
                           Transparency Tokens
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 May 2024.
+   This Internet-Draft will expire on 26 May 2024.
 
 Copyright Notice
 
