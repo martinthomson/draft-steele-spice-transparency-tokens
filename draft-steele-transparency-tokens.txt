@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        23 November 2023
-Expires: 26 May 2024
+Intended status: Standards Track                        27 November 2023
+Expires: 30 May 2024
 
 
                           Transparency Tokens
@@ -29,10 +29,10 @@ Abstract
    require higher than normal privacy, sustainability, or availability
    guarantees.
 
-   This specification describes a scallable solution to digital
+   This specification describes a scalable solution to digital
    credentials, that is market friendly, transport agnostic, privacy
    oriented, and accountable to users of digital credentials above all
-   other stake holders.
+   other stakeholders.
 
 About This Document
 
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 May 2024.
+   This Internet-Draft will expire on 30 May 2024.
 
 Copyright Notice
 
@@ -466,7 +466,7 @@ Table of Contents
 
 6.3.  Credential Endorsement
 
-   Some holder's may request a counter signature on an existing
+   Some holders may request a counter signature on an existing
    credential.
 
    This can help convince a verifier who is not familiar with a given
@@ -474,7 +474,7 @@ Table of Contents
 
 6.4.  Presentation Notarization
 
-   Some holder's may request a receipt from a notary when making
+   Some holders may request a receipt from a notary when making
    presentations.
 
    This can help them prove that a notary, or intermediary offering
@@ -692,8 +692,8 @@ Table of Contents
 
    Application developers need the ability to communciate the assurances
    associated with a harware and software platform such as iOS and
-   Android, so that issuer's can have confidence in the key material
-   that digital credentials will be bound too.
+   Android, so that issuers can have confidence in the key material that
+   digital credentials will be bound too.
 
    In order to accomplish this, the app developer needs both RATS
    Evidence and a RATS Endorsement.
