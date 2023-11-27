@@ -749,3 +749,4 @@ The following individuals provided input into the final form of the document:
 
 - Ea-nāṣir
 - Nanni
+- Nis Jespersen
