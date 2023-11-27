@@ -1002,6 +1002,8 @@ Acknowledgments
 
    *  Nanni
 
+   *  Nis Jespersen
+
 Author's Address
 
    Orie Steele
