@@ -71,7 +71,7 @@ Device capabilities, cost and power consumption can preclude
 access and adoption of digital credentials, or exclude communities
 that require higher than normal privacy, sustainability, or availability guarantees.
 
-This specification describes a scaleable solution to digital credentials,
+This specification describes a scalable solution to digital credentials,
 that is market friendly, transport agnostic, privacy oriented,
 and accountable to users of digital credentials above all other stakeholders.
 
