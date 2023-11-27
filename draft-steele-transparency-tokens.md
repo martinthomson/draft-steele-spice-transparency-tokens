@@ -71,9 +71,9 @@ Device capabilities, cost and power consumption can preclude
 access and adoption of digital credentials, or exclude communities
 that require higher than normal privacy, sustainability, or availability guarantees.
 
-This specification describes a scallable solution to digital credentials,
+This specification describes a scalable solution to digital credentials,
 that is market friendly, transport agnostic, privacy oriented,
-and accountable to users of digital credentials above all other stake holders.
+and accountable to users of digital credentials above all other stakeholders.
 
 --- middle
 
@@ -354,13 +354,13 @@ and other time related data to determine if the presentation is valid.
 
 ## Credential Endorsement
 
-Some holder's may request a counter signature on an existing credential.
+Some holders may request a counter signature on an existing credential.
 
 This can help convince a verifier who is not familiar with a given issuer.
 
 ## Presentation Notarization
 
-Some holder's may request a receipt from a notary when making presentations.
+Some holders may request a receipt from a notary when making presentations.
 
 This can help them prove that a notary, or intermediary offering notarization
 had accepted a presentaton in the past.
@@ -532,7 +532,7 @@ As a general preference, these fields should be a small as possible, and avoid t
 ### Trusted Hardware
 
 Application developers need the ability to communciate the assurances associated with a harware and software platform such as iOS and Android,
-so that issuer's can have confidence in the key material that digital credentials will be bound too.
+so that issuers can have confidence in the key material that digital credentials will be bound too.
 
 In order to accomplish this, the app developer needs both RATS Evidence and a RATS Endorsement.
 
