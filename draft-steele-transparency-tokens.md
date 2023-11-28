@@ -618,10 +618,29 @@ In more privacy preserving forms,
 this from reveals a subset of the information commited to by the issuer,
 and possibly hides the identity of the subject in the process.
 
+# Privacy Considerations
+
+TODO Privacy
+
+## Collection limitation of attributes by Verifiers
+## Holder consent for sending credential proofs to verifiers 
+## Unlinkability of credential proofs between Verifiers
+## Untrackability of a credential proof by an Issuer
+## Holder observability of both issued credentials and credential proofs
+## Issuer anonymity among a set of Issuers
 
 # Security Considerations
 
 TODO Security
+
+## Binding of an issued credential to the correct owner
+## Verification by a Holder that an issued credential matches with an expected object structure
+## Verification by a Verifier that a credential proof matches with a supported object structure
+## Binding of a credential proof to the correct owner
+## Detection of collusion attacks between individuals
+## Detection of the freshness or of the validity of a credential proof by a Verifier
+## Binding of a credential proof to the intended verifier
+## Prevention of the forwarding of a credential proof by a verifier to another Verifier
 
 # IANA Considerations
 
