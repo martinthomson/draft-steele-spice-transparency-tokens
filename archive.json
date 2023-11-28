@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-26T00:10:11.604367+00:00",
+  "timestamp": "2023-11-28T00:09:31.651206+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -82,5 +82,48 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOKuZz1s5gar44",
+      "title": "Minor typos",
+      "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/pull/2",
+      "state": "MERGED",
+      "author": "nissimsan",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-11-27T09:33:54Z",
+      "updatedAt": "2023-11-27T20:29:15Z",
+      "baseRepository": "OR13/draft-steele-spice-transparency-tokens",
+      "baseRefName": "main",
+      "baseRefOid": "aea152193e738dd29a8c1d254cf36e92a724fdc6",
+      "headRepository": "nissimsan/draft-steele-spice-transparency-tokens",
+      "headRefName": "minor-typos",
+      "headRefOid": "f0fec7029c4e3ab553a8bf1a562b4aa2266e2201",
+      "closedAt": "2023-11-27T20:29:14Z",
+      "mergedAt": "2023-11-27T20:29:14Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "838778eead662dae43d7004340406c1ea0b6e29c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKuZz1s5oYrSF",
+          "commit": {
+            "abbreviatedOid": "f0fec70"
+          },
+          "author": "OR13",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-11-27T20:28:36Z",
+          "updatedAt": "2023-11-27T20:28:36Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
