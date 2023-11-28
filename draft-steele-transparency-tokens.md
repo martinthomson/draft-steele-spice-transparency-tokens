@@ -209,6 +209,13 @@ The same entity may play all these roles,
 but for the sake of clarity we usually refer to interactions
 where each distinct entity playes a specific role in a workflow.
 
+~~~ mermaid
+flowchart LR
+    A:::someclass --> B
+    classDef someclass fill:#f96
+~~~
+
+
 The canonical example is:
 
 An issuer makes statements about a subject and produces an unforgable token as the issued credential.
