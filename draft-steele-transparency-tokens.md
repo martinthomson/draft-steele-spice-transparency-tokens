@@ -159,9 +159,18 @@ credential:
   that is a portable representation of the association between an
   identifier and a unit of authentication information, or statement
   and that can be presented by a holder.
+  
+issued credential:
+: A tamper-proof object that includes a set of attributes about an entity issued by an issuing authority.
+
+anonymous credential:
+: An issued credential that has privacy-preserving properties to enable data minimization and correlation resistance. RFC4949, deprecated this term, but recent advances in cryptography have changed the common understanding from what it once was.
+
+credential proof:
+: An unforgeable data object derived from an issued credential, constructed by the holder of they credential
 
 presentation:
-: The activity a holder performs when transmiting a credential to a verifier.
+: The activity a holder performs when transmiting a credential proofs, and optionally issued credentials to a verifier.
 
 notary:
 : Provides a trusted timestamp for a document, so that
