@@ -159,7 +159,7 @@ credential:
   that is a portable representation of the association between an
   identifier and a unit of authentication information, or statement
   and that can be presented by a holder.
-  
+
 issued credential:
 : A tamper-proof object that includes a set of attributes about an entity issued by an issuing authority.
 
@@ -632,7 +632,7 @@ and possibly hides the identity of the subject in the process.
 TODO Privacy
 
 ## Collection limitation of attributes by Verifiers
-## Holder consent for sending credential proofs to verifiers 
+## Holder consent for sending credential proofs to verifiers
 ## Unlinkability of credential proofs between Verifiers
 ## Untrackability of a credential proof by an Issuer
 ## Holder observability of both issued credentials and credential proofs
