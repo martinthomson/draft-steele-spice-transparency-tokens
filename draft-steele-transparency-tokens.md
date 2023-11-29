@@ -209,6 +209,11 @@ The same entity may play all these roles,
 but for the sake of clarity we usually refer to interactions
 where each distinct entity playes a specific role in a workflow.
 
+~~~ mermaid
+{::include ./diag.mermaid}
+~~~
+{: #credential-activity title="Digital Credential Roles "}
+
 The canonical example is:
 
 An issuer makes statements about a subject and produces an unforgable token as the issued credential.
