@@ -210,7 +210,10 @@ but for the sake of clarity we usually refer to interactions
 where each distinct entity playes a specific role in a workflow.
 
 ~~~ mermaid
-{::include ./diag.mermaid}
+erDiagram
+    Issuer ||--o{ Holder : "issues credential"
+    Holder ||--o{ Verifier :  "proves credential"
+    Verifier ||--o{ Issuer : "checks status"
 ~~~
 {: #credential-activity title="Digital Credential Roles "}
 
