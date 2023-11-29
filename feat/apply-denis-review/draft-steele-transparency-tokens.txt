@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        28 November 2023
-Expires: 31 May 2024
+Intended status: Standards Track                        29 November 2023
+Expires: 1 June 2024
 
 
                           Transparency Tokens
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 May 2024.
+   This Internet-Draft will expire on 1 June 2024.
 
 Copyright Notice
 
@@ -846,9 +846,9 @@ Table of Contents
    [I-D.ietf-cose-cwt-claims-in-headers]
               Looker, T. and M. B. Jones, "CBOR Web Token (CWT) Claims
               in COSE Headers", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cwt-claims-in-headers-09, 10 November 2023,
+              ietf-cose-cwt-claims-in-headers-10, 29 November 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cwt-claims-in-headers-09>.
+              cwt-claims-in-headers-10>.
 
    [I-D.ietf-cose-merkle-tree-proofs]
               Steele, O., Birkholz, H., Delignat-Lavaud, A., and C.
