@@ -139,20 +139,20 @@ identifier:
   system entity, distinguishing that identity from all others.
 
 issuer:
-: An identifier representing an entity that makes statements.
+: An entity that makes statements. Also known as issuing authority. This entity may have multiple identifiers.
 
 statement:
 : A definite or clear expression of something;
   a judgement, opinion, attribute, predicate or proposition regarding a subject.
 
 subject:
-: An identifier representing the entity being discussed, described or attributed.
+: The entity being discussed, described or attributed. This entity may have multiple identifiers.
 
 holder:
-: An identifier representing an entity which knows or possesses statements.
+: An entity which knows or possesses statements. This entity may have multiple identifiers.
 
 verifier:
-: An identifer representing an entity which reviews, checks or confirms statements.
+: An entity which reviews, checks or confirms proofs and optionally statements. This entity may have multiple identifiers.
 
 credential:
 : A token (usually an unforgeable data object)
@@ -160,8 +160,17 @@ credential:
   identifier and a unit of authentication information, or statement
   and that can be presented by a holder.
 
+issued credential:
+: A tamper-proof object that includes a set of attributes about an entity issued by an issuing authority.
+
+anonymous credential:
+: An issued credential that has privacy-preserving properties to enable data minimization and correlation resistance. RFC4949, deprecated this term, but recent advances in cryptography have changed the common understanding from what it once was.
+
+credential proof:
+: An unforgeable data object derived from an issued credential, constructed by the holder of they credential
+
 presentation:
-: The activity a holder performs when transmiting a credential to a verifier.
+: The activity a holder performs when transmiting a credential proofs, and optionally issued credentials to a verifier.
 
 notary:
 : Provides a trusted timestamp for a document, so that
@@ -618,10 +627,29 @@ In more privacy preserving forms,
 this from reveals a subset of the information commited to by the issuer,
 and possibly hides the identity of the subject in the process.
 
+# Privacy Considerations
+
+TODO Privacy
+
+## Collection limitation of attributes by Verifiers
+## Holder consent for sending credential proofs to verifiers
+## Unlinkability of credential proofs between Verifiers
+## Untrackability of a credential proof by an Issuer
+## Holder observability of both issued credentials and credential proofs
+## Issuer anonymity among a set of Issuers
 
 # Security Considerations
 
 TODO Security
+
+## Binding of an issued credential to the correct owner
+## Verification by a Holder that an issued credential matches with an expected object structure
+## Verification by a Verifier that a credential proof matches with a supported object structure
+## Binding of a credential proof to the correct owner
+## Detection of collusion attacks between individuals
+## Detection of the freshness or of the validity of a credential proof by a Verifier
+## Binding of a credential proof to the intended verifier
+## Prevention of the forwarding of a credential proof by a verifier to another Verifier
 
 # IANA Considerations
 
