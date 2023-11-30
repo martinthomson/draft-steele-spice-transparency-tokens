@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        29 November 2023
-Expires: 1 June 2024
+Intended status: Standards Track                        30 November 2023
+Expires: 2 June 2024
 
 
                           Transparency Tokens
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2024.
+   This Internet-Draft will expire on 2 June 2024.
 
 Copyright Notice
 
@@ -232,19 +232,20 @@ Table of Contents
       string -- that definitively represents a specific identity of a
       system entity, distinguishing that identity from all others.
 
-   issuer:  An identifier representing an entity that makes statements.
+   issuer:  An entity that makes statements.  Also known as issuing
+      authority.  This entity may have multiple identifiers.
 
    statement:  A definite or clear expression of something; a judgement,
       opinion, attribute, predicate or proposition regarding a subject.
 
-   subject:  An identifier representing the entity being discussed,
-      described or attributed.
+   subject:  The entity being discussed, described or attributed.  This
+      entity may have multiple identifiers.
 
-   holder:  An identifier representing an entity which knows or
-      possesses statements.
+   holder:  An entity which knows or possesses statements.  This entity
+      may have multiple identifiers.
 
-   verifier:  An identifer representing an entity which reviews, checks
-      or confirms statements.
+   verifier:  An entity which reviews, checks or confirms proofs and
+      optionally statements.  This entity may have multiple identifiers.
 
    credential:  A token (usually an unforgeable data object) that is a
       portable representation of the association between an identifier
