@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        27 November 2023
-Expires: 30 May 2024
+Intended status: Standards Track                        30 November 2023
+Expires: 2 June 2024
 
 
                           Transparency Tokens
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 May 2024.
+   This Internet-Draft will expire on 2 June 2024.
 
 Copyright Notice
 
@@ -119,11 +119,14 @@ Table of Contents
    8.  Credential Forms
      8.1.  Issued Credential
      8.2.  Presented Credential
-   9.  Security Considerations
-   10. IANA Considerations
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   9.  Privacy Considerations
+     9.1.  Collection limitation of attributes by Verifiers
+   10. Security Considerations
+     10.1.  Binding of an issued credential to the correct owner
+   11. IANA Considerations
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Appendix A.  Examples
      A.1.  Presented Token with Receipts
        A.1.1.  Protected Header
@@ -229,27 +232,41 @@ Table of Contents
       string -- that definitively represents a specific identity of a
       system entity, distinguishing that identity from all others.
 
-   issuer:  An identifier representing an entity that makes statements.
+   issuer:  An entity that makes statements.  Also known as issuing
+      authority.  This entity may have multiple identifiers.
 
    statement:  A definite or clear expression of something; a judgement,
       opinion, attribute, predicate or proposition regarding a subject.
 
-   subject:  An identifier representing the entity being discussed,
-      described or attributed.
+   subject:  The entity being discussed, described or attributed.  This
+      entity may have multiple identifiers.
 
-   holder:  An identifier representing an entity which knows or
-      possesses statements.
+   holder:  An entity which knows or possesses statements.  This entity
+      may have multiple identifiers.
 
-   verifier:  An identifer representing an entity which reviews, checks
-      or confirms statements.
+   verifier:  An entity which reviews, checks or confirms proofs and
+      optionally statements.  This entity may have multiple identifiers.
 
    credential:  A token (usually an unforgeable data object) that is a
       portable representation of the association between an identifier
       and a unit of authentication information, or statement and that
       can be presented by a holder.
 
+   issued credential:  A tamper-proof object that includes a set of
+      attributes about an entity issued by an issuing authority.
+
+   anonymous credential:  An issued credential that has privacy-
+      preserving properties to enable data minimization and correlation
+      resistance.  RFC4949, deprecated this term, but recent advances in
+      cryptography have changed the common understanding from what it
+      once was.
+
+   credential proof:  An unforgeable data object derived from an issued
+      credential, constructed by the holder of they credential
+
    presentation:  The activity a holder performs when transmiting a
-      credential to a verifier.
+      credential proofs, and optionally issued credentials to a
+      verifier.
 
    notary:  Provides a trusted timestamp for a document, so that someone
       can later prove that the document existed at that point in time;
@@ -792,24 +809,47 @@ Table of Contents
    information commited to by the issuer, and possibly hides the
    identity of the subject in the process.
 
-9.  Security Considerations
+9.  Privacy Considerations
+
+   TODO Privacy
+
+9.1.  Collection limitation of attributes by Verifiers
+
+   ## Holder consent for sending credential proofs to verifiers ##
+   Unlinkability of credential proofs between Verifiers ##
+   Untrackability of a credential proof by an Issuer ## Holder
+   observability of both issued credentials and credential proofs ##
+   Issuer anonymity among a set of Issuers
+
+10.  Security Considerations
 
    TODO Security
 
-10.  IANA Considerations
+10.1.  Binding of an issued credential to the correct owner
+
+   ## Verification by a Holder that an issued credential matches with an
+   expected object structure ## Verification by a Verifier that a
+   credential proof matches with a supported object structure ## Binding
+   of a credential proof to the correct owner ## Detection of collusion
+   attacks between individuals ## Detection of the freshness or of the
+   validity of a credential proof by a Verifier ## Binding of a
+   credential proof to the intended verifier ## Prevention of the
+   forwarding of a credential proof by a verifier to another Verifier
+
+11.  IANA Considerations
 
    This document has no IANA actions.
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [I-D.ietf-cose-cwt-claims-in-headers]
               Looker, T. and M. B. Jones, "CBOR Web Token (CWT) Claims
               in COSE Headers", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cwt-claims-in-headers-09, 10 November 2023,
+              ietf-cose-cwt-claims-in-headers-10, 29 November 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cwt-claims-in-headers-09>.
+              cwt-claims-in-headers-10>.
 
    [I-D.ietf-cose-merkle-tree-proofs]
               Steele, O., Birkholz, H., Delignat-Lavaud, A., and C.
@@ -878,7 +918,7 @@ Table of Contents
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
