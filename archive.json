@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-28T00:09:31.651206+00:00",
+  "timestamp": "2023-11-30T00:09:33.709633+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -80,6 +80,22 @@
           "updatedAt": "2023-11-22T15:57:04Z"
         }
       ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOKuZz1s54N-oT",
+      "title": "mermaid diagrams",
+      "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/issues/4",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "tldr not working very well...\r\n\r\n```\r\n~~~ mermaid\r\nerDiagram\r\n    Issuer ||--o{ Holder : \"issues credential\"\r\n    Holder ||--o{ Verifier :  \"proves credential\"\r\n    Verifier ||--o{ Issuer : \"checks status\"\r\n~~~\r\n{: #credential-activity title=\"Digital Credential Roles \"}\r\n```",
+      "createdAt": "2023-11-29T16:07:54Z",
+      "updatedAt": "2023-11-29T16:07:54Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -124,6 +140,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOKuZz1s5glX6C",
+      "title": "Apply Denis Review",
+      "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/pull/3",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Apply feedback from: https://mailarchive.ietf.org/arch/msg/spice/tIfNaDfoY0cYxjX_l98HvzuJLJ4/",
+      "createdAt": "2023-11-28T17:52:12Z",
+      "updatedAt": "2023-11-29T17:49:31Z",
+      "baseRepository": "OR13/draft-steele-spice-transparency-tokens",
+      "baseRefName": "main",
+      "baseRefOid": "889335d961238cfc339ec7b12f20520e99eb0f0d",
+      "headRepository": "OR13/draft-steele-spice-transparency-tokens",
+      "headRefName": "feat/apply-denis-review",
+      "headRefOid": "4f0f00d305218bb6379fad9da8ded19a444229d4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
