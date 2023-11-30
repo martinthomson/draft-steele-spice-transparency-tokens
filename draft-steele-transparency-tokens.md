@@ -139,20 +139,20 @@ identifier:
   system entity, distinguishing that identity from all others.
 
 issuer:
-: An identifier representing an entity that makes statements.
+: An entity that makes statements. Also known as issuing authority. This entity may have multiple identifiers.
 
 statement:
 : A definite or clear expression of something;
   a judgement, opinion, attribute, predicate or proposition regarding a subject.
 
 subject:
-: An identifier representing the entity being discussed, described or attributed.
+: The entity being discussed, described or attributed. This entity may have multiple identifiers.
 
 holder:
-: An identifier representing an entity which knows or possesses statements.
+: An entity which knows or possesses statements. This entity may have multiple identifiers.
 
 verifier:
-: An identifer representing an entity which reviews, checks or confirms statements.
+: An entity which reviews, checks or confirms proofs and optionally statements. This entity may have multiple identifiers.
 
 credential:
 : A token (usually an unforgeable data object)
