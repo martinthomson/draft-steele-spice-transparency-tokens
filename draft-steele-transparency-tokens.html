@@ -1895,31 +1895,41 @@ allows for digital trust systems to optimize for the properties that are most ne
 }
 </pre><a href="#section-3.2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-11">Because the payload is opaque that content type can be used to support key formats that are present in:<a href="#section-3.2-11" class="pilcrow">¶</a></p>
-<p id="section-3.2-12">https://www.iana.org/assignments/media-types/media-types.xhtml<a href="#section-3.2-12" class="pilcrow">¶</a></p>
-<p id="section-3.2-13">A verifier will need to discover or obtain the identity documents for the issuer and the holder.<a href="#section-3.2-13" class="pilcrow">¶</a></p>
-<p id="section-3.2-14">The identifier for the entity (issuer / holder) might be present in identifiers for resources representing the identity document for the identifier.<a href="#section-3.2-14" class="pilcrow">¶</a></p>
-<p id="section-3.2-15">This can be accomplished several ways.<a href="#section-3.2-15" class="pilcrow">¶</a></p>
-<p id="section-3.2-16">A verifier might discover an identity document through a well known URI<a href="#section-3.2-16" class="pilcrow">¶</a></p>
-<p id="section-3.2-17">https://datatracker.ietf.org/doc/html/rfc5785<a href="#section-3.2-17" class="pilcrow">¶</a></p>
-<p id="section-3.2-18">For example:<a href="#section-3.2-18" class="pilcrow">¶</a></p>
-<p id="section-3.2-19">https://issuer.example/.well-known/id<a href="#section-3.2-19" class="pilcrow">¶</a></p>
-<p id="section-3.2-20">A verifier might look up an identity document through a trusted key server, distributed database, or transparency service:<a href="#section-3.2-20" class="pilcrow">¶</a></p>
-<p id="section-3.2-21">https://service.example/keys/issuer.example<a href="#section-3.2-21" class="pilcrow">¶</a></p>
-<p id="section-3.2-22">In some cases, a verifier might require multiple receipts for an identity document,
-proving the same key information is bound to an identifier in multiple independent systems.<a href="#section-3.2-22" class="pilcrow">¶</a></p>
-<p id="section-3.2-23">https://government1.example/receipts/keys/issuer.example<a href="#section-3.2-23" class="pilcrow">¶</a></p>
-<p id="section-3.2-24">https://government2.example/receipts/keys/issuer.example<a href="#section-3.2-24" class="pilcrow">¶</a></p>
-<p id="section-3.2-25">The verifier can then decide to reject credential proofs from holder's that are unable to demonstrate enough transparency.<a href="#section-3.2-25" class="pilcrow">¶</a></p>
-<p id="section-3.2-26">During verification, the holder of a credential might be required to demonstrate possession of an identity document similar to:<a href="#section-3.2-26" class="pilcrow">¶</a></p>
-<p id="section-3.2-27">https://datatracker.ietf.org/doc/html/rfc9449#name-public-key-confirmation<a href="#section-3.2-27" class="pilcrow">¶</a></p>
-<p id="section-3.2-28">A verifier can prepare a challenge token (signed nonce) or nonce for the holder.<a href="#section-3.2-28" class="pilcrow">¶</a></p>
-<p id="section-3.2-29">The holder can sign the challenge or nonce, along with an audience claim binding their response to the requesting verifier.<a href="#section-3.2-29" class="pilcrow">¶</a></p>
-<p id="section-3.2-30">This "key binding token" is defined similar to https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06#name-key-binding-jwt<a href="#section-3.2-30" class="pilcrow">¶</a></p>
-<p id="section-3.2-31">A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a <code>cnf</code> claim with an identifier that resolves to an identity document,
-and verifiers can confirm the associated key binding token is signed with the public key in an identity document for the holder.<a href="#section-3.2-31" class="pilcrow">¶</a></p>
-<p id="section-3.2-32">An example of a credential with identity confirmation:<a href="#section-3.2-32" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-3.2-33">
+<p id="section-3.2-11">Because the payload is opaque that content type can be used to support key formats that are present in <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Types</a><a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-12">A verifier will need to discover or obtain the identity documents for the issuer and the holder.<a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2-13">The identifier for the entity (issuer / holder) might be present in identifiers for resources representing the identity document for the identifier.<a href="#section-3.2-13" class="pilcrow">¶</a></p>
+<p id="section-3.2-14">This can be accomplished several ways.<a href="#section-3.2-14" class="pilcrow">¶</a></p>
+<p id="section-3.2-15">A verifier might discover an identity document through <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span><a href="#section-3.2-15" class="pilcrow">¶</a></p>
+<p id="section-3.2-16">For example:<a href="#section-3.2-16" class="pilcrow">¶</a></p>
+<div class="lang-text sourcecode" id="section-3.2-17">
+<pre>
+https://issuer.example/.well-known/id
+</pre><a href="#section-3.2-17" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2-18">A verifier might look up an identity document through a trusted key server, distributed database, or transparency service:<a href="#section-3.2-18" class="pilcrow">¶</a></p>
+<div class="lang-text sourcecode" id="section-3.2-19">
+<pre>
+https://service.example/keys/issuer.example
+</pre><a href="#section-3.2-19" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2-20">In some cases, a verifier might require multiple receipts for an identity document,
+proving the same key information is bound to an identifier in multiple independent systems.<a href="#section-3.2-20" class="pilcrow">¶</a></p>
+<div class="lang-text sourcecode" id="section-3.2-21">
+<pre>
+https://government1.example/receipts/keys/issuer.example
+
+https://government2.example/receipts/keys/issuer.example
+</pre><a href="#section-3.2-21" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2-22">The verifier can then decide to reject credential proofs from holder's that are unable to demonstrate enough transparency.<a href="#section-3.2-22" class="pilcrow">¶</a></p>
+<p id="section-3.2-23">During verification, the holder of a credential might be required to demonstrate possession of an identity document similar to <span>[<a href="#RFC9449" class="cite xref">RFC9449</a>]</span><a href="#section-3.2-23" class="pilcrow">¶</a></p>
+<p id="section-3.2-24">A verifier can prepare a challenge token (signed nonce) or nonce for the holder.<a href="#section-3.2-24" class="pilcrow">¶</a></p>
+<p id="section-3.2-25">The holder can sign the challenge or nonce, along with an audience claim binding their response to the requesting verifier.<a href="#section-3.2-25" class="pilcrow">¶</a></p>
+<p id="section-3.2-26">This "key binding token" is defined similar to <span>[<a href="#I-D.ietf-oauth-selective-disclosure-jwt" class="cite xref">I-D.ietf-oauth-selective-disclosure-jwt</a>]</span><a href="#section-3.2-26" class="pilcrow">¶</a></p>
+<p id="section-3.2-27">A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a <code>cnf</code> claim with an identifier that resolves to an identity document,
+and verifiers can confirm the associated key binding token is signed with the public key in an identity document for the holder.<a href="#section-3.2-27" class="pilcrow">¶</a></p>
+<p id="section-3.2-28">An example of a credential with identity confirmation:<a href="#section-3.2-28" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3.2-29">
 <pre>
 {                                   / Protected                     /
   1: -35,                           / Algorithm                     /
@@ -1933,64 +1943,64 @@ and verifiers can confirm the associated key binding token is signed with the pu
     }
   },
 }
-</pre><a href="#section-3.2-33" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-29" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-34">In order to verify credential proofs for this credential with identity binding, the verifier must:<a href="#section-3.2-34" class="pilcrow">¶</a></p>
+<p id="section-3.2-30">In order to verify credential proofs for this credential with identity binding, the verifier must:<a href="#section-3.2-30" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-35.1">
-            <p id="section-3.2-35.1.1">decode the protected header, and lookup the issuer identity document.<a href="#section-3.2-35.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-31.1">
+            <p id="section-3.2-31.1.1">decode the protected header, and lookup the issuer identity document.<a href="#section-3.2-31.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-35.2">
-            <p id="section-3.2-35.2.1">confirm the issuer's identity document is still valid according to the verifier's policy<a href="#section-3.2-35.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-31.2">
+            <p id="section-3.2-31.2.1">confirm the issuer's identity document is still valid according to the verifier's policy<a href="#section-3.2-31.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-35.2.2.1">
-                <p id="section-3.2-35.2.2.1.1">check the validity period, ensure the credential is not activated in the future or expired in the past.<a href="#section-3.2-35.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-31.2.2.1">
+                <p id="section-3.2-31.2.2.1.1">check the validity period, ensure the credential is not activated in the future or expired in the past.<a href="#section-3.2-31.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-35.2.2.2">
-                <p id="section-3.2-35.2.2.2.1">check the status, in case the issuer of the issuer's identity docment has suspended or revoked the document.<a href="#section-3.2-35.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-31.2.2.2">
+                <p id="section-3.2-31.2.2.2.1">check the status, in case the issuer of the issuer's identity docment has suspended or revoked the document.<a href="#section-3.2-31.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-35.2.2.3">
-                <p id="section-3.2-35.2.2.3.1">check the key used to sign the credential proof, is present in the issuer's identity document.<a href="#section-3.2-35.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-31.2.2.3">
+                <p id="section-3.2-31.2.2.3.1">check the key used to sign the credential proof, is present in the issuer's identity document.<a href="#section-3.2-31.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-3.2-35.3">
-            <p id="section-3.2-35.3.1">verify the credential proof with the issuer's public key, from their identity document.<a href="#section-3.2-35.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-31.3">
+            <p id="section-3.2-31.3.1">verify the credential proof with the issuer's public key, from their identity document.<a href="#section-3.2-31.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-35.3.2.1">
-                <p id="section-3.2-35.3.2.1.1">decode the protected header, and validate the claims<a href="#section-3.2-35.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-31.3.2.1">
+                <p id="section-3.2-31.3.2.1.1">decode the protected header, and validate the claims<a href="#section-3.2-31.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-35.3.2.2">
-                <p id="section-3.2-35.3.2.2.1">lookup the holder's identity document using the hints inside the <code>cnf</code> claim<a href="#section-3.2-35.3.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-31.3.2.2">
+                <p id="section-3.2-31.3.2.2.1">lookup the holder's identity document using the hints inside the <code>cnf</code> claim<a href="#section-3.2-31.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-35.3.2.3">
-                <p id="section-3.2-35.3.2.3.1">perform the same validation checks as were done for the issuer's identity document on the holder's identity document.<a href="#section-3.2-35.3.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-31.3.2.3">
+                <p id="section-3.2-31.3.2.3.1">perform the same validation checks as were done for the issuer's identity document on the holder's identity document.<a href="#section-3.2-31.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-3.2-35.4">
-            <p id="section-3.2-35.4.1">verify the credential identity confirmation token using the holder's public key from the holder's identity document.<a href="#section-3.2-35.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-31.4">
+            <p id="section-3.2-31.4.1">verify the credential identity confirmation token using the holder's public key from the holder's identity document.<a href="#section-3.2-31.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-35.4.2.1">
-                <p id="section-3.2-35.4.2.1.1">check the validity period, ensure the token is not activated in the future or expired in the past.<a href="#section-3.2-35.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-31.4.2.1">
+                <p id="section-3.2-31.4.2.1.1">check the validity period, ensure the token is not activated in the future or expired in the past.<a href="#section-3.2-31.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-35.4.2.2">
-                <p id="section-3.2-35.4.2.2.1">check the key used to sign the credential identity confirmation token, is present in the holder's identity document.<a href="#section-3.2-35.4.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-31.4.2.2">
+                <p id="section-3.2-31.4.2.2.1">check the key used to sign the credential identity confirmation token, is present in the holder's identity document.<a href="#section-3.2-31.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
         </ul>
-<p id="section-3.2-36">After these verifications and validations have been completed, if they have all succeeded the verifier should believe the following:<a href="#section-3.2-36" class="pilcrow">¶</a></p>
-<p id="section-3.2-37">The issuer's intention to assert the payload's relation to the subject has not been tampered with, the intention is still valid and has not changed since the credential was issued.
+<p id="section-3.2-32">After these verifications and validations have been completed, if they have all succeeded the verifier should believe the following:<a href="#section-3.2-32" class="pilcrow">¶</a></p>
+<p id="section-3.2-33">The issuer's intention to assert the payload's relation to the subject has not been tampered with, the intention is still valid and has not changed since the credential was issued.
 The holder is in possession of the credential at the time of verification.
-The identity documents for both the issuer and holder are still valid.<a href="#section-3.2-37" class="pilcrow">¶</a></p>
-<p id="section-3.2-38">With these basics confirmed, the verifier can proceed to application / business layer processing of the payload.<a href="#section-3.2-38" class="pilcrow">¶</a></p>
-<p id="section-3.2-39">In the example above the payload is XML, and could represent some required legacy identity credential format.<a href="#section-3.2-39" class="pilcrow">¶</a></p>
-<p id="section-3.2-40">The verifier can then advertise that the legacy identity credential system is nearing end of life and that in order to support sustainability initiatives,
-reduce attack surface, and reduce carbon emmissions, only compact binary representations will be supported in the future.<a href="#section-3.2-40" class="pilcrow">¶</a></p>
-<p id="section-3.2-41">By keeping the payload opaque,
+The identity documents for both the issuer and holder are still valid.<a href="#section-3.2-33" class="pilcrow">¶</a></p>
+<p id="section-3.2-34">With these basics confirmed, the verifier can proceed to application / business layer processing of the payload.<a href="#section-3.2-34" class="pilcrow">¶</a></p>
+<p id="section-3.2-35">In the example above the payload is XML, and could represent some required legacy identity credential format.<a href="#section-3.2-35" class="pilcrow">¶</a></p>
+<p id="section-3.2-36">The verifier can then advertise that the legacy identity credential system is nearing end of life and that in order to support sustainability initiatives,
+reduce attack surface, and reduce carbon emmissions, only compact binary representations will be supported in the future.<a href="#section-3.2-36" class="pilcrow">¶</a></p>
+<p id="section-3.2-37">By keeping the payload opaque,
 transparency tokens can be intergrated into legacy systems that require larger and older media types,
-and assist those systems in modernizing to support compact binary.<a href="#section-3.2-41" class="pilcrow">¶</a></p>
+and assist those systems in modernizing to support compact binary.<a href="#section-3.2-37" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2636,9 +2646,17 @@ and possibly hides the identity of the subject in the process.<a href="#section-
         <dd>
 <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"An Internet Attribute Certificate Profile for Authorization"</span>, <span class="seriesInfo">RFC 5755</span>, <span class="seriesInfo">DOI 10.17487/RFC5755</span>, <time datetime="2010-01" class="refDate">January 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5755">https://www.rfc-editor.org/rfc/rfc5755</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC5785">[RFC5785]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Hammer-Lahav</span>, <span class="refTitle">"Defining Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 5785</span>, <span class="seriesInfo">DOI 10.17487/RFC5785</span>, <time datetime="2010-04" class="refDate">April 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5785">https://www.rfc-editor.org/rfc/rfc5785</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8725">[RFC8725]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8725">https://www.rfc-editor.org/rfc/rfc8725</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9449">[RFC9449]</dt>
+      <dd>
+<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Jones, M.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"OAuth 2.0 Demonstrating Proof of Possession (DPoP)"</span>, <span class="seriesInfo">RFC 9449</span>, <span class="seriesInfo">DOI 10.17487/RFC9449</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9449">https://www.rfc-editor.org/rfc/rfc9449</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

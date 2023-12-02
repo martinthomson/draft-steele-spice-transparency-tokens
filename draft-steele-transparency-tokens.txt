@@ -431,9 +431,8 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
    }
 
    Because the payload is opaque that content type can be used to
-   support key formats that are present in:
-
-   https://www.iana.org/assignments/media-types/media-types.xhtml
+   support key formats that are present in IANA Media Types
+   (https://www.iana.org/assignments/media-types/media-types.xhtml)
 
    A verifier will need to discover or obtain the identity documents for
    the issuer and the holder.
@@ -444,10 +443,7 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
 
    This can be accomplished several ways.
 
-   A verifier might discover an identity document through a well known
-   URI
-
-   https://datatracker.ietf.org/doc/html/rfc5785
+   A verifier might discover an identity document through [RFC5785]
 
    For example:
 
@@ -470,10 +466,7 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
    holder's that are unable to demonstrate enough transparency.
 
    During verification, the holder of a credential might be required to
-   demonstrate possession of an identity document similar to:
-
-   https://datatracker.ietf.org/doc/html/rfc9449#name-public-key-
-   confirmation
+   demonstrate possession of an identity document similar to [RFC9449]
 
    A verifier can prepare a challenge token (signed nonce) or nonce for
    the holder.
@@ -482,8 +475,7 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
    claim binding their response to the requesting verifier.
 
    This "key binding token" is defined similar to
-   https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-
-   disclosure-jwt-06#name-key-binding-jwt
+   [I-D.ietf-oauth-selective-disclosure-jwt]
 
    A credential requiring identity document confirmation (traceability,
    NOT unlinkability) can contain a cnf claim with an identifier that
@@ -1199,10 +1191,20 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
               RFC 5755, DOI 10.17487/RFC5755, January 2010,
               <https://www.rfc-editor.org/rfc/rfc5755>.
 
+   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, April 2010,
+              <https://www.rfc-editor.org/rfc/rfc5785>.
+
    [RFC8725]  Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
               Current Practices", BCP 225, RFC 8725,
               DOI 10.17487/RFC8725, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8725>.
+
+   [RFC9449]  Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
+              Jones, M., and D. Waite, "OAuth 2.0 Demonstrating Proof of
+              Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
+              September 2023, <https://www.rfc-editor.org/rfc/rfc9449>.
 
 Appendix A.  Examples
 
