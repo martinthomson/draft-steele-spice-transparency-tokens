@@ -106,7 +106,9 @@ so that consumers and businesses can make informed decisions regarding products 
 
 If Nanni and Ea-nāṣir had transparency tokens, their trade would have been frictionless, and we would all be without the first written use case expressing the concept of credentials.
 
-# Diversity is a Feature
+# Architecture
+
+## Format Agility
 
 Modern paper credentials come in many different shapes and sizes, from notary stamped paper documents with wet ink signatures,
 to ASN.1 and X.509 signed XML documents representing commercial invoices.
@@ -118,6 +120,148 @@ CBOR stands on the shoulders of giants, having benefitted from being created las
 It is natural to wish for there to be only one format, for digital credentials, as this would improve interoperability and reduce the costs associated with verifying credentials as part of business transactions, but nature does not produce discrete steps in technology deployment. Horses and automobiles shared the streets of cities in the early 19th century, and XML, ASN.1, JSON and CBOR will coexist so long as business requires them too.
 
 There are advantages to having multiple formats for digital credentials, particular when attempting to give privacy or security benefits to users that depend on specific protocols, that are only able to handle certain credential formats. For example, OAuth and OpenID Connect tend to require JSON claimsets and JWT credential formats.
+
+In order to preserve format agility, while leveraging existing claims and terminology, this document recommends a convention of preserving payload content as opaque bytes, leveraging protected headers to signature media types associated with validation of payloads, and claims in headers, in cases where format specific claims need to be consistently understood by verifiers.
+
+## Identity Documents
+
+In order to verify a credential proof, verification material from the issuer and holder needs to be available at the time the verification algorithm is called.
+
+Resolving key material just in time negatively impacts privacy, security and performance.
+
+Whenever possible, it recommended to fetch verification keys and any associated metadata from a trusted source, and cache them locally.
+
+Key material can also be delivered out of band or in band depending on the envelope format used.
+
+This specification defines an identity document format based on transparency receipts that is compact, integrity protected, and can be delivered in band to verifiers in a network denied environment.
+
+This example is not normative.
+
+The identity document is a COSE Key, which has been signed and made transparent:
+
+~~~~ cbor-diag
+18(                                 / COSE Sign 1                   /
+    [
+      h'a4013822...31333337',       / Protected                     /
+      {                             / Unprotected                   /
+        -333: [                     / Receipts (1)                  /
+          h'd2845867...cf71886e'    / Receipt 1                     /
+        ]
+      },
+      nil,                          / Detached payload              /
+      h'1c3271fb...b5df03d7'        / Signature                     /
+    ]
+)
+~~~~
+
+The protected header includes identifiers for the entity, and the issuer of the identity document:
+
+~~~~ cbor-diag
+{                                   / Protected                     /
+  1: -35,                           / Algorithm                     /
+  3: application/cose-key,          / Content type                  /
+  4: h'5b55dd99...8a2acc6b',        / Key identifier                /
+  13: {                             / CWT Claims                    /
+    1: issuer.example,              / Issuer                        /
+    2: holder.example,              / Subject                       /
+  },
+}
+~~~~
+
+Because the payload is opaque that content type can be used to support key formats that are present in:
+
+https://www.iana.org/assignments/media-types/media-types.xhtml
+
+A verifier will need to discover or obtain the identity documents for the issuer and the holder.
+
+The identifier for the entity (issuer / holder) might be present in identifiers for resources representing the identity document for the identifier.
+
+This can be accomplished several ways.
+
+A verifier might discover an identity document through a well known URI
+
+https://datatracker.ietf.org/doc/html/rfc5785
+
+For example:
+
+https://issuer.example/.well-known/id
+
+A verifier might look up an identity document through a trusted key server, distributed database, or transparency service:
+
+https://service.example/keys/issuer.example
+
+In some cases, a verifier might require multiple receipts for an identity document, 
+proving the same key information is bound to an identifier in multiple independent systems.
+
+https://government1.example/receipts/keys/issuer.example
+
+https://government2.example/receipts/keys/issuer.example
+
+The verifier can then decide to reject credential proofs from holder's that are unable to demonstrate enough transparency.
+
+During verification, the holder of a credential might be required to demonstrate possession of an identity document similar to:
+
+https://datatracker.ietf.org/doc/html/rfc9449#name-public-key-confirmation
+
+A verifier can prepare a challenge token (signed nonce) or nonce for the holder.
+
+The holder can sign the challenge or nonce, along with an audience claim binding their response to the requesting verifier.
+
+This "key binding token" is defined similar to https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06#name-key-binding-jwt
+
+A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a `cnf` claim with an identifier that resolves to an identity document, 
+and verifiers can confirm the associated key binding token is signed with the public key in an identity document for the holder.
+
+An example of a credential with identity confirmation:
+
+~~~~ cbor-diag
+{                                   / Protected                     /
+  1: -35,                           / Algorithm                     /
+  3: application/example+xml,       / Content type                  /
+  4: h'5b55dd99...8a2acc6b',        / Issuer Key identifier         /
+  13: {                             / CWT Claims                    /
+    1: issuer.example,              / Issuer                        /
+    2: holder.example,              / Subject                       /
+    8: {                            / Confirmation                  /
+      3: h'a04bfe57...296ea037'     / Holder Identity Doc URI       /
+    }
+  },
+}
+~~~~
+
+In order to verify credential proofs for this credential with identity binding, the verifier must:
+
+- decode the protected header, and lookup the issuer identity document.
+- confirm the issuer's identity document is still valid according to the verifier's policy
+  - check the validity period, ensure the credential is not activated in the future or expired in the past.
+  - check the status, in case the issuer of the issuer's identity docment has suspended or revoked the document.
+  - check the key used to sign the credential proof, is present in the issuer's identity document.
+- verify the credential proof with the issuer's public key, from their identity document.
+  - decode the protected header, and validate the claims
+  - lookup the holder's identity document using the hints inside the `cnf` claim
+  - perform the same validation checks as were done for the issuer's identity document on the holder's identity document.
+- verify the credential identity confirmation token using the holder's public key from the holder's identity document.
+  - check the validity period, ensure the token is not activated in the future or expired in the past.
+  - check the key used to sign the credential identity confirmation token, is present in the holder's identity document. 
+ 
+After these verifications and validations have been completed, if they have all succeeded the verifier should believe the following:
+
+The issuer's intention to assert the payload's relation to the subject has not been tampered with, the intention is still valid and has not changed since the credential was issued.
+The holder is in possession of the credential at the time of verification.
+The identity documents for both the issuer and holder are still valid.
+
+With these basics confirmed, the verifier can proceed to application / business layer processing of the payload.
+
+In the example above the payload is XML, and could represent some required legacy identity credential format.
+
+The verifier can then advertise that the legacy identity credential system is nearing end of life and that in order to support sustainability initiatives, 
+reduce attack surface, and reduce carbon emmissions, only compact binary representations will be supported in the future.
+
+By keeping the payload opaque, 
+transparency tokens can be intergrated into legacy systems that require larger and older media types, 
+and assist those systems in modernizing to support compact binary.
+
+
 
 # Terminology
 
