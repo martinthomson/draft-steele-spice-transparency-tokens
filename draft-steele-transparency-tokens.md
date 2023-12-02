@@ -49,6 +49,8 @@ informative:
   RFC4949: SEC-v2
   RFC5755: ATTRIBUTE-CERTS
   RFC8725: JWT-BCP
+  RFC5785: WELL-KNOWN-URIS
+  RFC9449: DPOP
 
 
 
@@ -349,9 +351,7 @@ The protected header includes identifiers for the entity, and the issuer of the 
 }
 ~~~~
 
-Because the payload is opaque that content type can be used to support key formats that are present in:
-
-https://www.iana.org/assignments/media-types/media-types.xhtml
+Because the payload is opaque that content type can be used to support key formats that are present in [IANA Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml)
 
 A verifier will need to discover or obtain the identity documents for the issuer and the holder.
 
@@ -359,36 +359,39 @@ The identifier for the entity (issuer / holder) might be present in identifiers 
 
 This can be accomplished several ways.
 
-A verifier might discover an identity document through a well known URI
-
-https://datatracker.ietf.org/doc/html/rfc5785
+A verifier might discover an identity document through {{-WELL-KNOWN-URIS}}
 
 For example:
 
+~~~text
 https://issuer.example/.well-known/id
+~~~
 
 A verifier might look up an identity document through a trusted key server, distributed database, or transparency service:
 
+~~~text
 https://service.example/keys/issuer.example
+~~~
 
 In some cases, a verifier might require multiple receipts for an identity document,
 proving the same key information is bound to an identifier in multiple independent systems.
 
+~~~text
+
 https://government1.example/receipts/keys/issuer.example
 
 https://government2.example/receipts/keys/issuer.example
+~~~
 
 The verifier can then decide to reject credential proofs from holder's that are unable to demonstrate enough transparency.
 
-During verification, the holder of a credential might be required to demonstrate possession of an identity document similar to:
-
-https://datatracker.ietf.org/doc/html/rfc9449#name-public-key-confirmation
+During verification, the holder of a credential might be required to demonstrate possession of an identity document similar to {{-DPOP}}
 
 A verifier can prepare a challenge token (signed nonce) or nonce for the holder.
 
 The holder can sign the challenge or nonce, along with an audience claim binding their response to the requesting verifier.
 
-This "key binding token" is defined similar to https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06#name-key-binding-jwt
+This "key binding token" is defined similar to {{-SD-JWT}}
 
 A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a `cnf` claim with an identifier that resolves to an identity document,
 and verifiers can confirm the associated key binding token is signed with the public key in an identity document for the holder.
