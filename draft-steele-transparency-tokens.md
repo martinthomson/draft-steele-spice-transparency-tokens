@@ -106,9 +106,106 @@ so that consumers and businesses can make informed decisions regarding products 
 
 If Nanni and Ea-nāṣir had transparency tokens, their trade would have been frictionless, and we would all be without the first written use case expressing the concept of credentials.
 
+# Terminology
+
+{::boilerplate bcp14-tagged}
+
+To the best of our ability we reuse terminology from {{-SEC-v2}}.
+For clarity, we provide more specific definitions when necessary.
+
+principle:
+: A specific identity claimed by an entity when accessing a system.
+
+identity:
+: The collective aspect of a set of attribute values (i.e., a
+  set of characteristics) by which a system entity is recognizable or known.
+
+identifier:
+: A data object -- often, a printable, non-blank character
+  string -- that definitively represents a specific identity of a
+  system entity, distinguishing that identity from all others.
+
+issuer:
+: An entity that makes statements. Also known as issuing authority. This entity may have multiple identifiers.
+
+statement:
+: A definite or clear expression of something;
+  a judgement, opinion, attribute, predicate or proposition regarding a subject.
+
+subject:
+: The entity being discussed, described or attributed. This entity may have multiple identifiers.
+
+holder:
+: An entity which knows or possesses statements. This entity may have multiple identifiers.
+
+verifier:
+: An entity which reviews, checks or confirms proofs and optionally statements. This entity may have multiple identifiers.
+
+credential:
+: A token (usually an unforgeable data object)
+  that is a portable representation of the association between an
+  identifier and a unit of authentication information, or statement
+  and that can be presented by a holder.
+
+issued credential:
+: A tamper-proof object that includes a set of attributes about an entity issued by an issuing authority.
+
+anonymous credential:
+: An issued credential that has privacy-preserving properties to enable data minimization and correlation resistance. RFC4949, deprecated this term, but recent advances in cryptography have changed the common understanding from what it once was.
+
+credential proof:
+: An unforgeable data object derived from an issued credential, constructed by the holder of they credential
+
+presentation:
+: The activity a holder performs when transmiting a credential proofs, and optionally issued credentials to a verifier.
+
+notary:
+: Provides a trusted timestamp for a document, so that
+  someone can later prove that the document existed at that point in
+  time; verifies the signature(s) on a signed document before
+  applying the stamp.
+
+receipt:
+: A token (usually an unforgeable data object)
+  proving that notarization has taken place.
+
+counter signature:
+: A token (usually an unforgeable data object)
+  proving that a second issuer, has seen a credential from a first issuer.
+
+mediator:
+: A party that provides a transmission capability that protects
+  the confidentiality or presentations made by holders.
+
+
 # Architecture
 
-## Actors
+## Credential Roles
+
+Credentials are essential to the efficient function of principles,
+be they natural persons or legal entities.
+
+Throughout their lifetime, a principle might create many identifiers,
+and these identifiers may be known to fulfill the various
+roles associated with digital credentials.
+
+These roles include being the issuer of statements about a subject,
+being the subject of statements made by issuers,
+holding credentials regarding identifiers for the principle,
+holding credentials regarding identifiers for other principles,
+presenting credentials to verifiers, or receiving presentations from other holders.
+
+The same entity may play all these roles,
+but for the sake of clarity we usually refer to interactions
+where each distinct entity playes a specific role in a workflow.
+
+The canonical example is:
+
+An issuer makes statements about a subject and produces an unforgable token as the issued credential.
+The issuer transmits the issued credential to a holder.
+A verifier requests a credential be presented.
+The holder derives a presentable form of the issued credential, called the presented credential.
+The holder transmits the presented credential to a verifier.
 
 ~~~aasvg
                                     Holders
@@ -143,32 +240,16 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
                                   Status Checks
 ~~~
 
-## Format Agility
+There are auxillary roles which are special cases of the issuer, holder or verifier which are common
+in scenarious requiring additional assurance or confidentiality.
 
-Modern paper credentials come in many different shapes and sizes, from notary stamped paper documents with wet ink signatures,
-to ASN.1 and X.509 signed XML documents representing commercial invoices.
+In cases where the issuer, or holder lacks credibility,
+a countersignature or endorsement from a more reputatible entity
+might be required to convince a warry verifier.
 
-New formats are created to address the challenges and shortcoming of the formats that came before. Clay tablets were heavy, paper is easily destroyed, XML Signatures were expensive to compute and error prone, JSON while readable and writable by humans was wasteful of compute and storage when processed by machines.
-
-CBOR stands on the shoulders of giants, having benefitted from being created last, and suffering for being less well adopted than XML and JSON.
-
-It is natural to wish for there to be only one format, for digital credentials, as this would improve interoperability and reduce the costs associated with verifying credentials as part of business transactions, but nature does not produce discrete steps in technology deployment. Horses and automobiles shared the streets of cities in the early 19th century, and XML, ASN.1, JSON and CBOR will coexist so long as business requires them too.
-
-There are advantages to having multiple formats for digital credentials, particular when attempting to give privacy or security benefits to users that depend on specific protocols, that are only able to handle certain credential formats. For example, OAuth and OpenID Connect tend to require JSON claimsets and JWT credential formats.
-
-In order to preserve format agility, while leveraging existing claims and terminology, this document recommends a convention of preserving payload content as opaque bytes, leveraging protected headers to signature media types associated with validation of payloads, and claims in headers, in cases where format specific claims need to be consistently understood by verifiers.
-
-## Identity Documents
-
-In order to verify a credential proof, verification material from the issuer and holder needs to be available at the time the verification algorithm is called.
-
-Resolving key material just in time negatively impacts privacy, security and performance.
-
-Whenever possible, it recommended to fetch verification keys and any associated metadata from a trusted source, and cache them locally.
-
-Key material can also be delivered out of band or in band depending on the envelope format used.
-
-This specification defines an identity document format based on transparency receipts that is compact, integrity protected, and can be delivered in band to verifiers in a network denied environment.
+In cases where the issuer or holder might rotate verification keys frequently,
+or where the issuer or holder might not be well known to a verifier,
+a receipt from a notary can provide assurance to the verifier.
 
 ~~~aasvg
 
@@ -211,6 +292,29 @@ Authority B -->      |  | Receipt 2  +<------+   Service 2  |
 Verifiers    -->             \   Credential Proofs  /
                               '--------------------'
 ~~~
+
+
+In cases where a holder requires untraceability or is required
+to provide confidentiality regarding the provenance of a credential,
+delegation with or without attenutation to intermediate, or mediators holders, may be necessary.
+
+Notaries and mediators can leverage receipts and counter signatures to adjust the transparency,
+traceability and confidentiality associated with credentials.
+
+Giving unique and meaningful names to these roles,
+allows for digital trust systems to optimize for the properties that are most needed for credential use cases.
+
+## Identity Documents
+
+In order to verify a credential proof, verification material from the issuer and holder needs to be available at the time the verification algorithm is called.
+
+Resolving key material just in time negatively impacts privacy, security and performance.
+
+Whenever possible, it recommended to fetch verification keys and any associated metadata from a trusted source, and cache them locally.
+
+Key material can also be delivered out of band or in band depending on the envelope format used.
+
+This specification defines an identity document format based on transparency receipts that is compact, integrity protected, and can be delivered in band to verifiers in a network denied environment.
 
 This example is not normative.
 
@@ -339,126 +443,6 @@ transparency tokens can be intergrated into legacy systems that require larger a
 and assist those systems in modernizing to support compact binary.
 
 
-
-# Terminology
-
-{::boilerplate bcp14-tagged}
-
-To the best of our ability we reuse terminology from {{-SEC-v2}}.
-For clarity, we provide more specific definitions when necessary.
-
-principle:
-: A specific identity claimed by an entity when accessing a system.
-
-identity:
-: The collective aspect of a set of attribute values (i.e., a
-  set of characteristics) by which a system entity is recognizable or known.
-
-identifier:
-: A data object -- often, a printable, non-blank character
-  string -- that definitively represents a specific identity of a
-  system entity, distinguishing that identity from all others.
-
-issuer:
-: An entity that makes statements. Also known as issuing authority. This entity may have multiple identifiers.
-
-statement:
-: A definite or clear expression of something;
-  a judgement, opinion, attribute, predicate or proposition regarding a subject.
-
-subject:
-: The entity being discussed, described or attributed. This entity may have multiple identifiers.
-
-holder:
-: An entity which knows or possesses statements. This entity may have multiple identifiers.
-
-verifier:
-: An entity which reviews, checks or confirms proofs and optionally statements. This entity may have multiple identifiers.
-
-credential:
-: A token (usually an unforgeable data object)
-  that is a portable representation of the association between an
-  identifier and a unit of authentication information, or statement
-  and that can be presented by a holder.
-
-issued credential:
-: A tamper-proof object that includes a set of attributes about an entity issued by an issuing authority.
-
-anonymous credential:
-: An issued credential that has privacy-preserving properties to enable data minimization and correlation resistance. RFC4949, deprecated this term, but recent advances in cryptography have changed the common understanding from what it once was.
-
-credential proof:
-: An unforgeable data object derived from an issued credential, constructed by the holder of they credential
-
-presentation:
-: The activity a holder performs when transmiting a credential proofs, and optionally issued credentials to a verifier.
-
-notary:
-: Provides a trusted timestamp for a document, so that
-  someone can later prove that the document existed at that point in
-  time; verifies the signature(s) on a signed document before
-  applying the stamp.
-
-receipt:
-: A token (usually an unforgeable data object)
-  proving that notarization has taken place.
-
-counter signature:
-: A token (usually an unforgeable data object)
-  proving that a second issuer, has seen a credential from a first issuer.
-
-mediator:
-: A party that provides a transmission capability that protects
-  the confidentiality or presentations made by holders.
-
-# Credential Roles
-
-Credentials are essential to the efficient function of principles,
-be they natural persons or legal entities.
-
-Throughout their lifetime, a principle might create many identifiers,
-and these identifiers may be known to fulfill the various
-roles associated with digital credentials.
-
-These roles include being the issuer of statements about a subject,
-being the subject of statements made by issuers,
-holding credentials regarding identifiers for the principle,
-holding credentials regarding identifiers for other principles,
-presenting credentials to verifiers, or receiving presentations from other holders.
-
-The same entity may play all these roles,
-but for the sake of clarity we usually refer to interactions
-where each distinct entity playes a specific role in a workflow.
-
-The canonical example is:
-
-An issuer makes statements about a subject and produces an unforgable token as the issued credential.
-The issuer transmits the issued credential to a holder.
-A verifier requests a credential be presented.
-The holder derives a presentable form of the issued credential, called the presented credential.
-The holder transmits the presented credential to a verifier.
-
-There are auxillary roles which are special cases of the issuer, holder or verifier which are common
-in scenarious requiring additional assurance or confidentiality.
-
-In cases where the issuer, or holder lacks credibility,
-a countersignature or endorsement from a more reputatible entity
-might be required to convince a warry verifier.
-
-In cases where the issuer or holder might rotate verification keys frequently,
-or where the issuer or holder might not be well known to a verifier,
-a receipt from a notary can provide assurance to the verifier.
-
-In cases where a holder requires untraceability or is required
-to provide confidentiality regarding the provenance of a credential,
-delegation with or without attenutation to intermediate, or mediators holders, may be necessary.
-
-Notaries and mediators can leverage receipts and counter signatures to adjust the transparency,
-traceability and confidentiality associated with credentials.
-
-Giving unique and meaningful names to these roles,
-allows for digital trust systems to optimize for the properties that are most needed for credential use cases.
-
 # Credential Principles
 
 Identification happens before we recognize threat or opportunity.
@@ -473,6 +457,22 @@ we state these principles of digital credentials,
 but caution that not all these properties can be easily achieved without sacrifice,
 and where some principles may be appropriatly degraded for legal entities,
 other principles ought to be preserved for natural persons.
+
+## Format Agility
+
+Modern paper credentials come in many different shapes and sizes, from notary stamped paper documents with wet ink signatures,
+to ASN.1 and X.509 signed XML documents representing commercial invoices.
+
+New formats are created to address the challenges and shortcoming of the formats that came before. Clay tablets were heavy, paper is easily destroyed, XML Signatures were expensive to compute and error prone, JSON while readable and writable by humans was wasteful of compute and storage when processed by machines.
+
+CBOR stands on the shoulders of giants, having benefitted from being created last, and suffering for being less well adopted than XML and JSON.
+
+It is natural to wish for there to be only one format, for digital credentials, as this would improve interoperability and reduce the costs associated with verifying credentials as part of business transactions, but nature does not produce discrete steps in technology deployment. Horses and automobiles shared the streets of cities in the early 19th century, and XML, ASN.1, JSON and CBOR will coexist so long as business requires them too.
+
+There are advantages to having multiple formats for digital credentials, particular when attempting to give privacy or security benefits to users that depend on specific protocols, that are only able to handle certain credential formats. For example, OAuth and OpenID Connect tend to require JSON claimsets and JWT credential formats.
+
+In order to preserve format agility, while leveraging existing claims and terminology, this document recommends a convention of preserving payload content as opaque bytes, leveraging protected headers to signature media types associated with validation of payloads, and claims in headers, in cases where format specific claims need to be consistently understood by verifiers.
+
 
 ## Autonomy
 
