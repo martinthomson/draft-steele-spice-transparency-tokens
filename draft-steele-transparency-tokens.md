@@ -170,6 +170,48 @@ Key material can also be delivered out of band or in band depending on the envel
 
 This specification defines an identity document format based on transparency receipts that is compact, integrity protected, and can be delivered in band to verifiers in a network denied environment.
 
+~~~aasvg
+
+                 .----+-----.  .-----------.
+Issuers     --> | Statements ||  Envelopes  |
+                 '----+-----'  '-----+-----'
+                      |              |
+                       '----. .-----'
+                             |
+                             v
+                      .------+------.
+                     |  Credentials  |
+                      '------+------'
+                             |                +--------------+
+                          .-' '-------------->+ Transparency |
+                         |   .----------.     |              |
+Authority A -->          |  | Receipt 1  +<---+   Service 1  |
+                         |   '---+------'     +---------+----+
+                         |       |                      |
+                         |       |           +--------------+
+                      .-' '------)---------->+ Transparency |
+                     |   .----------.        |              |
+Authority B -->      |  | Receipt 2  +<------+   Service 2  |
+                     |   '----+-----'        +----+---------+
+                     |        |  |                |     |
+                      '-. .--'   |                |     |
+                         |       |                |     |
+                          '-. .-'                 |     |
+                             |                    |     |
+                             v                    v     v
+                       .-----+------.         .---+-----+--.
+                      | Transparency |       | Identity     |
+                      | Tokens       |       | Documents    |
+                       '-----+------'         '------+-----'
+                             |                       |
+                              '-------.     .-------'
+                                       |   |
+                                       v   v
+                            .-----------+---+--------.
+Verifiers    -->             \   Credential Proofs  /
+                              '--------------------'
+~~~
+
 This example is not normative.
 
 The identity document is a COSE Key, which has been signed and made transparent:
