@@ -108,6 +108,41 @@ If Nanni and Ea-nāṣir had transparency tokens, their trade would have been fr
 
 # Architecture
 
+## Actors
+
+~~~aasvg
+                                    Holders
+                                     ______
+                                    /\     \
+                                   /  \     \
+                                  /    \_____\
+                                 _\    / ____/_
+                                /\ \  / /\     \
+                               /  \ \/_/  \     \
+                              /    \__/    \_____\
+                             _\    /  \    / ____/_
+                            /\ \  /    \  / /\     \
+                           /  \ \/_____/\/_/  \     \
+                          /    \_____\    /    \_____\
+      Credentials        _\    /     /    \    / ____/_        Proofs
+                        /\ \  /     /      \  / /\     \
+                       /  \ \/_____/        \/_/  \     \
+                      /    \_____\            /    \_____\
+                     _\    /     /            \    / ____/_
+                    /\ \  /     /              \  / /\     \
+                   /  \ \/_____/                \/_/  \     \
+                  /    \_____\                    /    \_____\
+                 _\    /     /_  ______  ______  _\____/ ____/_
+                /\ \  /     /  \/\     \/\     \/\     \/\     \
+               /  \ \/_____/    \ \     \ \     \ \     \ \     \
+              /    \_____\ \_____\ \_____\ \_____\ \_____\ \_____\
+              \    /     / /     / /     / /     / /     / /     /
+               \  /     / /     / /     / /     / /     / /     /
+Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifiers
+
+                                  Status Checks
+~~~
+
 ## Format Agility
 
 Modern paper credentials come in many different shapes and sizes, from notary stamped paper documents with wet ink signatures,
@@ -190,7 +225,7 @@ A verifier might look up an identity document through a trusted key server, dist
 
 https://service.example/keys/issuer.example
 
-In some cases, a verifier might require multiple receipts for an identity document, 
+In some cases, a verifier might require multiple receipts for an identity document,
 proving the same key information is bound to an identifier in multiple independent systems.
 
 https://government1.example/receipts/keys/issuer.example
@@ -209,7 +244,7 @@ The holder can sign the challenge or nonce, along with an audience claim binding
 
 This "key binding token" is defined similar to https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-06#name-key-binding-jwt
 
-A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a `cnf` claim with an identifier that resolves to an identity document, 
+A credential requiring identity document confirmation (traceability, NOT unlinkability) can contain a `cnf` claim with an identifier that resolves to an identity document,
 and verifiers can confirm the associated key binding token is signed with the public key in an identity document for the holder.
 
 An example of a credential with identity confirmation:
@@ -242,8 +277,8 @@ In order to verify credential proofs for this credential with identity binding, 
   - perform the same validation checks as were done for the issuer's identity document on the holder's identity document.
 - verify the credential identity confirmation token using the holder's public key from the holder's identity document.
   - check the validity period, ensure the token is not activated in the future or expired in the past.
-  - check the key used to sign the credential identity confirmation token, is present in the holder's identity document. 
- 
+  - check the key used to sign the credential identity confirmation token, is present in the holder's identity document.
+
 After these verifications and validations have been completed, if they have all succeeded the verifier should believe the following:
 
 The issuer's intention to assert the payload's relation to the subject has not been tampered with, the intention is still valid and has not changed since the credential was issued.
@@ -254,11 +289,11 @@ With these basics confirmed, the verifier can proceed to application / business 
 
 In the example above the payload is XML, and could represent some required legacy identity credential format.
 
-The verifier can then advertise that the legacy identity credential system is nearing end of life and that in order to support sustainability initiatives, 
+The verifier can then advertise that the legacy identity credential system is nearing end of life and that in order to support sustainability initiatives,
 reduce attack surface, and reduce carbon emmissions, only compact binary representations will be supported in the future.
 
-By keeping the payload opaque, 
-transparency tokens can be intergrated into legacy systems that require larger and older media types, 
+By keeping the payload opaque,
+transparency tokens can be intergrated into legacy systems that require larger and older media types,
 and assist those systems in modernizing to support compact binary.
 
 
