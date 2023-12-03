@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-30T00:09:33.709633+00:00",
+  "timestamp": "2023-12-03T00:10:07.047471+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -146,24 +146,26 @@
       "id": "PR_kwDOKuZz1s5glX6C",
       "title": "Apply Denis Review",
       "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Apply feedback from: https://mailarchive.ietf.org/arch/msg/spice/tIfNaDfoY0cYxjX_l98HvzuJLJ4/",
       "createdAt": "2023-11-28T17:52:12Z",
-      "updatedAt": "2023-11-29T17:49:31Z",
+      "updatedAt": "2023-11-30T15:50:15Z",
       "baseRepository": "OR13/draft-steele-spice-transparency-tokens",
       "baseRefName": "main",
       "baseRefOid": "889335d961238cfc339ec7b12f20520e99eb0f0d",
       "headRepository": "OR13/draft-steele-spice-transparency-tokens",
       "headRefName": "feat/apply-denis-review",
-      "headRefOid": "4f0f00d305218bb6379fad9da8ded19a444229d4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "9c871c785abc5e20cc610b4a228be26d7452ca98",
+      "closedAt": "2023-11-30T15:50:14Z",
+      "mergedAt": "2023-11-30T15:50:14Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "99baa77649fe3b3c2751148de4a7e1c514e08ad3"
+      },
       "comments": [],
       "reviews": []
     }
