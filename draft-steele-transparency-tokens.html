@@ -41,13 +41,13 @@ and accountable to users of digital credentials above all other stakeholders.
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.0.0
+    platformdirs 4.1.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.31.0
     setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.10
+    wcwidth 0.2.12
 -->
 <link href="draft-steele-transparency-tokens.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Steele</td>
-<td class="center">Expires 4 June 2024</td>
+<td class="center">Expires 9 June 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-steele-transparency-tokens-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-12-02" class="published">2 December 2023</time>
+<time datetime="2023-12-07" class="published">7 December 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-06-04">4 June 2024</time></dd>
+<dd class="expires"><time datetime="2024-06-09">9 June 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ and accountable to users of digital credentials above all other stakeholders.<a 
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1396,7 +1396,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-2">To the best of our ability we reuse terminology from <span>[<a href="#RFC4949" class="cite xref">RFC4949</a>]</span>.
 For clarity, we provide more specific definitions when necessary.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-3">
-        <dt id="section-2-3.1">principle:</dt>
+        <dt id="section-2-3.1">principal:</dt>
         <dd style="margin-left: 1.5em" id="section-2-3.2">
           <p id="section-2-3.2.1">A specific identity claimed by an entity when accessing a system.<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1507,15 +1507,15 @@ the confidentiality or presentations made by holders.<a href="#section-2-3.34.1"
         <h3 id="name-credential-roles">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-credential-roles" class="section-name selfRef">Credential Roles</a>
         </h3>
-<p id="section-3.1-1">Credentials are essential to the efficient function of principles,
+<p id="section-3.1-1">Credentials are essential to the efficient function of principals,
 be they natural persons or legal entities.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Throughout their lifetime, a principle might create many identifiers,
+<p id="section-3.1-2">Throughout their lifetime, a principal might create many identifiers,
 and these identifiers may be known to fulfill the various
 roles associated with digital credentials.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">These roles include being the issuer of statements about a subject,
 being the subject of statements made by issuers,
-holding credentials regarding identifiers for the principle,
-holding credentials regarding identifiers for other principles,
+holding credentials regarding identifiers for the principal,
+holding credentials regarding identifiers for other principals,
 presenting credentials to verifiers, or receiving presentations from other holders.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">The same entity may play all these roles,
 but for the sake of clarity we usually refer to interactions

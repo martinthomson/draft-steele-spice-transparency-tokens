@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                         2 December 2023
-Expires: 4 June 2024
+Intended status: Standards Track                         7 December 2023
+Expires: 9 June 2024
 
 
                           Transparency Tokens
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2024.
+   This Internet-Draft will expire on 9 June 2024.
 
 Copyright Notice
 
@@ -192,7 +192,7 @@ Table of Contents
    To the best of our ability we reuse terminology from [RFC4949].  For
    clarity, we provide more specific definitions when necessary.
 
-   principle:  A specific identity claimed by an entity when accessing a
+   principal:  A specific identity claimed by an entity when accessing a
       system.
 
    identity:  The collective aspect of a set of attribute values (i.e.,
@@ -258,17 +258,17 @@ Table of Contents
 
 3.1.  Credential Roles
 
-   Credentials are essential to the efficient function of principles, be
+   Credentials are essential to the efficient function of principals, be
    they natural persons or legal entities.
 
-   Throughout their lifetime, a principle might create many identifiers,
+   Throughout their lifetime, a principal might create many identifiers,
    and these identifiers may be known to fulfill the various roles
    associated with digital credentials.
 
    These roles include being the issuer of statements about a subject,
    being the subject of statements made by issuers, holding credentials
-   regarding identifiers for the principle, holding credentials
-   regarding identifiers for other principles, presenting credentials to
+   regarding identifiers for the principal, holding credentials
+   regarding identifiers for other principals, presenting credentials to
    verifiers, or receiving presentations from other holders.
 
    The same entity may play all these roles, but for the sake of clarity
