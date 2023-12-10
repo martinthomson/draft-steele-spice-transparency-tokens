@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-07T00:09:30.294946+00:00",
+  "timestamp": "2023-12-10T00:10:37.095175+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -104,7 +104,7 @@
       "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/issues/5",
       "state": "OPEN",
       "author": "aj-stein-nist",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Hi, I was casually reviewing this draft because you had mentioned the diagrams elsewhere, and the topic still interests me so I read it. One thing that caught my eye is this draft defines an identifier as a principle and not principal. The latter makes more sense to me [and a quick search confirms this is what OAuth uses](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-assertions-05), and I assume others.\r\n\r\nIs this a typo? I will be doing a quick PR shortly, replacing all use of principle with principal, which seems to be the intent and is a very easy fix (I hope).\r\n\r\nIf I misunderstood feel free to tell me so and close it.",
@@ -190,28 +190,30 @@
       "id": "PR_kwDOKuZz1s5hFRRj",
       "title": "Principle->principal where relevant",
       "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "aj-stein-nist",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Correct principle to principle as needed, closing #5.\r\n\r\nIn some cases, this draft is discussing principles for using identities.\r\n\r\nIn other cases, this draft is using the defined term in this draft for a Principal and its relationship to an Identifier.\r\n\r\nThese changes correct the latter where writing it as the former. This likely seems to be incorrect.",
       "createdAt": "2023-12-04T17:33:31Z",
-      "updatedAt": "2023-12-04T17:45:58Z",
+      "updatedAt": "2023-12-07T17:05:37Z",
       "baseRepository": "OR13/draft-steele-spice-transparency-tokens",
       "baseRefName": "main",
       "baseRefOid": "1a42464286787bc6e37c154e3a1554748cec8288",
       "headRepository": "aj-stein-nist/draft-steele-spice-transparency-tokens",
       "headRefName": "5-principle-principal",
       "headRefOid": "99c63ffa42069bd5bbc990c563d5ace5b71ffa79",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-12-07T17:05:37Z",
+      "mergedAt": "2023-12-07T17:05:37Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "40ca36941c4a83b157884e80cb041245dbfed92a"
+      },
       "comments": [
         {
           "author": "aj-stein-nist",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "It took me a few reads to catch myself replacing them all, but the [Credential Principles](https://or13.github.io/draft-steele-spice-transparency-tokens/draft-steele-transparency-tokens.html#section-4) Section is using the word as spelled with its common non-technical definition, so I left it as-is.",
           "createdAt": "2023-12-04T17:34:50Z",
           "updatedAt": "2023-12-04T17:35:07Z"
