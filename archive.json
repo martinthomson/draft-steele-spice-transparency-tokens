@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-19T00:09:39.615181+00:00",
+  "timestamp": "2023-12-21T00:09:18.146479+00:00",
   "repo": "OR13/draft-steele-spice-transparency-tokens",
   "labels": [
     {
@@ -110,6 +110,22 @@
       "body": "Hi, I was casually reviewing this draft because you had mentioned the diagrams elsewhere, and the topic still interests me so I read it. One thing that caught my eye is this draft defines an identifier as a principle and not principal. The latter makes more sense to me [and a quick search confirms this is what OAuth uses](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-assertions-05), and I assume others.\r\n\r\nIs this a typo? I will be doing a quick PR shortly, replacing all use of principle with principal, which seems to be the intent and is a very easy fix (I hope).\r\n\r\nIf I misunderstood feel free to tell me so and close it.",
       "createdAt": "2023-12-04T16:58:26Z",
       "updatedAt": "2023-12-04T16:58:26Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOKuZz1s56KlVj",
+      "title": "Consider Reputation as an analog to Transparency",
+      "url": "https://github.com/OR13/draft-steele-spice-transparency-tokens/issues/7",
+      "state": "OPEN",
+      "author": "openprivacy",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is fascinating! Thank you @aj-stein-nist for bringing this to my attention. More discussion than issue:\r\n\r\nWhile there can be well-known public verification entities, a verifier can be very specific, perhaps personal, consisting of a collection of verifier services both public and private.  This enables a local, target-specific trust metric that yields a reputational scoring. Zero-knowledge mechanisms can provide blinded authentication and reputation calculation.\r\n\r\nAs such, Transparency Tokens could provide a basis for an agoric, reputation-based marketplace.",
+      "createdAt": "2023-12-19T23:43:13Z",
+      "updatedAt": "2023-12-20T01:28:32Z",
       "closedAt": null,
       "comments": []
     }
