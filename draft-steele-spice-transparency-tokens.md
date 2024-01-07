@@ -3,7 +3,7 @@ v: 3
 title: "Transparency Tokens"
 abbrev: "SpiceTT"
 cat: std
-docname: draft-steele-transparency-tokens-latest
+docname: draft-steele-spice-transparency-tokens-latest
 stream: IETF
 number:
 date:
