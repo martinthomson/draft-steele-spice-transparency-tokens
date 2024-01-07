@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                         7 December 2023
-Expires: 9 June 2024
+Intended status: Standards Track                          7 January 2024
+Expires: 10 July 2024
 
 
                           Transparency Tokens
@@ -68,11 +68,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 June 2024.
+   This Internet-Draft will expire on 10 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1117,16 +1117,16 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
               Steele, O., Birkholz, H., Delignat-Lavaud, A., and C.
               Fournet, "Concise Encoding of Signed Merkle Tree Proofs",
               Work in Progress, Internet-Draft, draft-ietf-cose-merkle-
-              tree-proofs-02, 17 November 2023,
+              tree-proofs-03, 11 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              merkle-tree-proofs-02>.
+              merkle-tree-proofs-03>.
 
    [I-D.ietf-cose-typ-header-parameter]
               Jones, M. B. and O. Steele, "COSE "typ" (type) Header
               Parameter", Work in Progress, Internet-Draft, draft-ietf-
-              cose-typ-header-parameter-01, 7 November 2023,
+              cose-typ-header-parameter-02, 8 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              typ-header-parameter-01>.
+              typ-header-parameter-02>.
 
    [I-D.ietf-jose-json-web-proof]
               Miller, J., Waite, D., and M. B. Jones, "JSON Web Proof",
@@ -1145,9 +1145,9 @@ Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifie
    [I-D.ietf-oauth-selective-disclosure-jwt]
               Fett, D., Yasuda, K., and B. Campbell, "Selective
               Disclosure for JWTs (SD-JWT)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-selective-disclosure-jwt-06, 23
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-selective-disclosure-jwt-06>.
+              Draft, draft-ietf-oauth-selective-disclosure-jwt-07, 11
+              December 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-selective-disclosure-jwt-07>.
 
    [I-D.ietf-privacypass-architecture]
               Davidson, A., Iyengar, J., and C. A. Wood, "The Privacy
