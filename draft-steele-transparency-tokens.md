@@ -115,7 +115,7 @@ If Nanni and Ea-nāṣir had transparency tokens, their trade would have been fr
 To the best of our ability we reuse terminology from {{-SEC-v2}}.
 For clarity, we provide more specific definitions when necessary.
 
-principle:
+principal:
 : A specific identity claimed by an entity when accessing a system.
 
 identity:
@@ -184,17 +184,17 @@ mediator:
 
 ## Credential Roles
 
-Credentials are essential to the efficient function of principles,
+Credentials are essential to the efficient function of principals,
 be they natural persons or legal entities.
 
-Throughout their lifetime, a principle might create many identifiers,
+Throughout their lifetime, a principal might create many identifiers,
 and these identifiers may be known to fulfill the various
 roles associated with digital credentials.
 
 These roles include being the issuer of statements about a subject,
 being the subject of statements made by issuers,
-holding credentials regarding identifiers for the principle,
-holding credentials regarding identifiers for other principles,
+holding credentials regarding identifiers for the principal,
+holding credentials regarding identifiers for other principals,
 presenting credentials to verifiers, or receiving presentations from other holders.
 
 The same entity may play all these roles,
