@@ -4,8 +4,8 @@
 
 Network Working Group                                          O. Steele
 Internet-Draft                                                 Transmute
-Intended status: Standards Track                        30 November 2023
-Expires: 2 June 2024
+Intended status: Standards Track                          7 January 2024
+Expires: 10 July 2024
 
 
                           Transparency Tokens
@@ -68,11 +68,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 June 2024.
+   This Internet-Draft will expire on 10 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -87,46 +87,48 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Diversity is a Feature
-   3.  Terminology
-   4.  Credential Roles
-   5.  Credential Principles
-     5.1.  Autonomy
-     5.2.  Confidentiality
-     5.3.  Anonymity
-     5.4.  Authenticity
-     5.5.  Transparency
-     5.6.  Accountability
-   6.  Credential Workflows
-     6.1.  Credential Delivery
-     6.2.  Presentation Delivery
-     6.3.  Credential Endorsement
-     6.4.  Presentation Notarization
-   7.  Credential Formats
-     7.1.  CBOR Web Tokens
-     7.2.  JSON Web Tokens
-     7.3.  CBOR Web Proofs
-     7.4.  JSON Web Proofs
-     7.5.  Transparency Tokens
-       7.5.1.  Opaque Payloads
-       7.5.2.  Detached Payloads
-       7.5.3.  Redundant Claims
-       7.5.4.  Key Discovery
-       7.5.5.  Mutable Claims
-       7.5.6.  Entity Identifiers
-       7.5.7.  Trusted Hardware
-       7.5.8.  Architectural Alignment
-   8.  Credential Forms
-     8.1.  Issued Credential
-     8.2.  Presented Credential
-   9.  Privacy Considerations
-     9.1.  Collection limitation of attributes by Verifiers
-   10. Security Considerations
-     10.1.  Binding of an issued credential to the correct owner
-   11. IANA Considerations
-   12. References
-     12.1.  Normative References
-     12.2.  Informative References
+   2.  Terminology
+   3.  Architecture
+     3.1.  Credential Roles
+     3.2.  Identity Documents
+   4.  Credential Principles
+     4.1.  Format Agility
+     4.2.  Autonomy
+     4.3.  Confidentiality
+     4.4.  Anonymity
+     4.5.  Authenticity
+     4.6.  Transparency
+     4.7.  Accountability
+   5.  Credential Workflows
+     5.1.  Credential Delivery
+     5.2.  Presentation Delivery
+     5.3.  Credential Endorsement
+     5.4.  Presentation Notarization
+   6.  Credential Formats
+     6.1.  CBOR Web Tokens
+     6.2.  JSON Web Tokens
+     6.3.  CBOR Web Proofs
+     6.4.  JSON Web Proofs
+     6.5.  Transparency Tokens
+       6.5.1.  Opaque Payloads
+       6.5.2.  Detached Payloads
+       6.5.3.  Redundant Claims
+       6.5.4.  Key Discovery
+       6.5.5.  Mutable Claims
+       6.5.6.  Entity Identifiers
+       6.5.7.  Trusted Hardware
+       6.5.8.  Architectural Alignment
+   7.  Credential Forms
+     7.1.  Issued Credential
+     7.2.  Presented Credential
+   8.  Privacy Considerations
+     8.1.  Collection limitation of attributes by Verifiers
+   9.  Security Considerations
+     9.1.  Binding of an issued credential to the correct owner
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Appendix A.  Examples
      A.1.  Presented Token with Receipts
        A.1.1.  Protected Header
@@ -179,38 +181,7 @@ Table of Contents
    been frictionless, and we would all be without the first written use
    case expressing the concept of credentials.
 
-2.  Diversity is a Feature
-
-   Modern paper credentials come in many different shapes and sizes,
-   from notary stamped paper documents with wet ink signatures, to ASN.1
-   and X.509 signed XML documents representing commercial invoices.
-
-   New formats are created to address the challenges and shortcoming of
-   the formats that came before.  Clay tablets were heavy, paper is
-   easily destroyed, XML Signatures were expensive to compute and error
-   prone, JSON while readable and writable by humans was wasteful of
-   compute and storage when processed by machines.
-
-   CBOR stands on the shoulders of giants, having benefitted from being
-   created last, and suffering for being less well adopted than XML and
-   JSON.
-
-   It is natural to wish for there to be only one format, for digital
-   credentials, as this would improve interoperability and reduce the
-   costs associated with verifying credentials as part of business
-   transactions, but nature does not produce discrete steps in
-   technology deployment.  Horses and automobiles shared the streets of
-   cities in the early 19th century, and XML, ASN.1, JSON and CBOR will
-   coexist so long as business requires them too.
-
-   There are advantages to having multiple formats for digital
-   credentials, particular when attempting to give privacy or security
-   benefits to users that depend on specific protocols, that are only
-   able to handle certain credential formats.  For example, OAuth and
-   OpenID Connect tend to require JSON claimsets and JWT credential
-   formats.
-
-3.  Terminology
+2.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -283,7 +254,9 @@ Table of Contents
    mediator:  A party that provides a transmission capability that
       protects the confidentiality or presentations made by holders.
 
-4.  Credential Roles
+3.  Architecture
+
+3.1.  Credential Roles
 
    Credentials are essential to the efficient function of principles, be
    they natural persons or legal entities.
@@ -311,6 +284,37 @@ Table of Contents
    credential, called the presented credential.  The holder transmits
    the presented credential to a verifier.
 
+                                    Holders
+                                     ______
+                                    /\     \
+                                   /  \     \
+                                  /    \_____\
+                                 _\    / ____/_
+                                /\ \  / /\     \
+                               /  \ \/_/  \     \
+                              /    \__/    \_____\
+                             _\    /  \    / ____/_
+                            /\ \  /    \  / /\     \
+                           /  \ \/_____/\/_/  \     \
+                          /    \_____\    /    \_____\
+      Credentials        _\    /     /    \    / ____/_        Proofs
+                        /\ \  /     /      \  / /\     \
+                       /  \ \/_____/        \/_/  \     \
+                      /    \_____\            /    \_____\
+                     _\    /     /            \    / ____/_
+                    /\ \  /     /              \  / /\     \
+                   /  \ \/_____/                \/_/  \     \
+                  /    \_____\                    /    \_____\
+                 _\    /     /_  ______  ______  _\____/ ____/_
+                /\ \  /     /  \/\     \/\     \/\     \/\     \
+               /  \ \/_____/    \ \     \ \     \ \     \ \     \
+              /    \_____\ \_____\ \_____\ \_____\ \_____\ \_____\
+              \    /     / /     / /     / /     / /     / /     /
+               \  /     / /     / /     / /     / /     / /     /
+Issuers         \/_____/\/_____/\/_____/\/_____/\/_____/\/_____/         Verifiers
+
+                                  Status Checks
+
    There are auxillary roles which are special cases of the issuer,
    holder or verifier which are common in scenarious requiring
    additional assurance or confidentiality.
@@ -323,6 +327,45 @@ Table of Contents
    frequently, or where the issuer or holder might not be well known to
    a verifier, a receipt from a notary can provide assurance to the
    verifier.
+
+                    .----+-----.  .-----------.
+   Issuers     --> | Statements ||  Envelopes  |
+                    '----+-----'  '-----+-----'
+                         |              |
+                          '----. .-----'
+                                |
+                                v
+                         .------+------.
+                        |  Credentials  |
+                         '------+------'
+                                |                +--------------+
+                             .-' '-------------->+ Transparency |
+                            |   .----------.     |              |
+   Authority A -->          |  | Receipt 1  +<---+   Service 1  |
+                            |   '---+------'     +---------+----+
+                            |       |                      |
+                            |       |           +--------------+
+                         .-' '------)---------->+ Transparency |
+                        |   .----------.        |              |
+   Authority B -->      |  | Receipt 2  +<------+   Service 2  |
+                        |   '----+-----'        +----+---------+
+                        |        |  |                |     |
+                         '-. .--'   |                |     |
+                            |       |                |     |
+                             '-. .-'                 |     |
+                                |                    |     |
+                                v                    v     v
+                          .-----+------.         .---+-----+--.
+                         | Transparency |       | Identity     |
+                         | Tokens       |       | Documents    |
+                          '-----+------'         '------+-----'
+                                |                       |
+                                 '-------.     .-------'
+                                          |   |
+                                          v   v
+                               .-----------+---+--------.
+   Verifiers    -->             \   Credential Proofs  /
+                                 '--------------------'
 
    In cases where a holder requires untraceability or is required to
    provide confidentiality regarding the provenance of a credential,
@@ -337,7 +380,188 @@ Table of Contents
    trust systems to optimize for the properties that are most needed for
    credential use cases.
 
-5.  Credential Principles
+3.2.  Identity Documents
+
+   In order to verify a credential proof, verification material from the
+   issuer and holder needs to be available at the time the verification
+   algorithm is called.
+
+   Resolving key material just in time negatively impacts privacy,
+   security and performance.
+
+   Whenever possible, it recommended to fetch verification keys and any
+   associated metadata from a trusted source, and cache them locally.
+
+   Key material can also be delivered out of band or in band depending
+   on the envelope format used.
+
+   This specification defines an identity document format based on
+   transparency receipts that is compact, integrity protected, and can
+   be delivered in band to verifiers in a network denied environment.
+
+   This example is not normative.
+
+   The identity document is a COSE Key, which has been signed and made
+   transparent:
+
+   18(                                 / COSE Sign 1                   /
+       [
+         h'a4013822...31333337',       / Protected                     /
+         {                             / Unprotected                   /
+           -333: [                     / Receipts (1)                  /
+             h'd2845867...cf71886e'    / Receipt 1                     /
+           ]
+         },
+         nil,                          / Detached payload              /
+         h'1c3271fb...b5df03d7'        / Signature                     /
+       ]
+   )
+
+   The protected header includes identifiers for the entity, and the
+   issuer of the identity document:
+
+   {                                   / Protected                     /
+     1: -35,                           / Algorithm                     /
+     3: application/cose-key,          / Content type                  /
+     4: h'5b55dd99...8a2acc6b',        / Key identifier                /
+     13: {                             / CWT Claims                    /
+       1: issuer.example,              / Issuer                        /
+       2: holder.example,              / Subject                       /
+     },
+   }
+
+   Because the payload is opaque that content type can be used to
+   support key formats that are present in IANA Media Types
+   (https://www.iana.org/assignments/media-types/media-types.xhtml)
+
+   A verifier will need to discover or obtain the identity documents for
+   the issuer and the holder.
+
+   The identifier for the entity (issuer / holder) might be present in
+   identifiers for resources representing the identity document for the
+   identifier.
+
+   This can be accomplished several ways.
+
+   A verifier might discover an identity document through [RFC5785]
+
+   For example:
+
+   https://issuer.example/.well-known/id
+
+   A verifier might look up an identity document through a trusted key
+   server, distributed database, or transparency service:
+
+   https://service.example/keys/issuer.example
+
+   In some cases, a verifier might require multiple receipts for an
+   identity document, proving the same key information is bound to an
+   identifier in multiple independent systems.
+
+   https://government1.example/receipts/keys/issuer.example
+
+   https://government2.example/receipts/keys/issuer.example
+
+   The verifier can then decide to reject credential proofs from
+   holder's that are unable to demonstrate enough transparency.
+
+   During verification, the holder of a credential might be required to
+   demonstrate possession of an identity document similar to [RFC9449]
+
+   A verifier can prepare a challenge token (signed nonce) or nonce for
+   the holder.
+
+   The holder can sign the challenge or nonce, along with an audience
+   claim binding their response to the requesting verifier.
+
+   This "key binding token" is defined similar to
+   [I-D.ietf-oauth-selective-disclosure-jwt]
+
+   A credential requiring identity document confirmation (traceability,
+   NOT unlinkability) can contain a cnf claim with an identifier that
+   resolves to an identity document, and verifiers can confirm the
+   associated key binding token is signed with the public key in an
+   identity document for the holder.
+
+   An example of a credential with identity confirmation:
+
+   {                                   / Protected                     /
+     1: -35,                           / Algorithm                     /
+     3: application/example+xml,       / Content type                  /
+     4: h'5b55dd99...8a2acc6b',        / Issuer Key identifier         /
+     13: {                             / CWT Claims                    /
+       1: issuer.example,              / Issuer                        /
+       2: holder.example,              / Subject                       /
+       8: {                            / Confirmation                  /
+         3: h'a04bfe57...296ea037'     / Holder Identity Doc URI       /
+       }
+     },
+   }
+
+   In order to verify credential proofs for this credential with
+   identity binding, the verifier must:
+
+   *  decode the protected header, and lookup the issuer identity
+      document.
+
+   *  confirm the issuer's identity document is still valid according to
+      the verifier's policy
+
+      -  check the validity period, ensure the credential is not
+         activated in the future or expired in the past.
+
+      -  check the status, in case the issuer of the issuer's identity
+         docment has suspended or revoked the document.
+
+      -  check the key used to sign the credential proof, is present in
+         the issuer's identity document.
+
+   *  verify the credential proof with the issuer's public key, from
+      their identity document.
+
+      -  decode the protected header, and validate the claims
+
+      -  lookup the holder's identity document using the hints inside
+         the cnf claim
+
+      -  perform the same validation checks as were done for the
+         issuer's identity document on the holder's identity document.
+
+   *  verify the credential identity confirmation token using the
+      holder's public key from the holder's identity document.
+
+      -  check the validity period, ensure the token is not activated in
+         the future or expired in the past.
+
+      -  check the key used to sign the credential identity confirmation
+         token, is present in the holder's identity document.
+
+   After these verifications and validations have been completed, if
+   they have all succeeded the verifier should believe the following:
+
+   The issuer's intention to assert the payload's relation to the
+   subject has not been tampered with, the intention is still valid and
+   has not changed since the credential was issued.  The holder is in
+   possession of the credential at the time of verification.  The
+   identity documents for both the issuer and holder are still valid.
+
+   With these basics confirmed, the verifier can proceed to application
+   / business layer processing of the payload.
+
+   In the example above the payload is XML, and could represent some
+   required legacy identity credential format.
+
+   The verifier can then advertise that the legacy identity credential
+   system is nearing end of life and that in order to support
+   sustainability initiatives, reduce attack surface, and reduce carbon
+   emmissions, only compact binary representations will be supported in
+   the future.
+
+   By keeping the payload opaque, transparency tokens can be intergrated
+   into legacy systems that require larger and older media types, and
+   assist those systems in modernizing to support compact binary.
+
+4.  Credential Principles
 
    Identification happens before we recognize threat or opportunity.
 
@@ -353,7 +577,45 @@ Table of Contents
    appropriatly degraded for legal entities, other principles ought to
    be preserved for natural persons.
 
-5.1.  Autonomy
+4.1.  Format Agility
+
+   Modern paper credentials come in many different shapes and sizes,
+   from notary stamped paper documents with wet ink signatures, to ASN.1
+   and X.509 signed XML documents representing commercial invoices.
+
+   New formats are created to address the challenges and shortcoming of
+   the formats that came before.  Clay tablets were heavy, paper is
+   easily destroyed, XML Signatures were expensive to compute and error
+   prone, JSON while readable and writable by humans was wasteful of
+   compute and storage when processed by machines.
+
+   CBOR stands on the shoulders of giants, having benefitted from being
+   created last, and suffering for being less well adopted than XML and
+   JSON.
+
+   It is natural to wish for there to be only one format, for digital
+   credentials, as this would improve interoperability and reduce the
+   costs associated with verifying credentials as part of business
+   transactions, but nature does not produce discrete steps in
+   technology deployment.  Horses and automobiles shared the streets of
+   cities in the early 19th century, and XML, ASN.1, JSON and CBOR will
+   coexist so long as business requires them too.
+
+   There are advantages to having multiple formats for digital
+   credentials, particular when attempting to give privacy or security
+   benefits to users that depend on specific protocols, that are only
+   able to handle certain credential formats.  For example, OAuth and
+   OpenID Connect tend to require JSON claimsets and JWT credential
+   formats.
+
+   In order to preserve format agility, while leveraging existing claims
+   and terminology, this document recommends a convention of preserving
+   payload content as opaque bytes, leveraging protected headers to
+   signature media types associated with validation of payloads, and
+   claims in headers, in cases where format specific claims need to be
+   consistently understood by verifiers.
+
+4.2.  Autonomy
 
    Issuers reserve the right to make statements.  Holders reserve the
    right to present credentials.  Verifiers reserve the right to reject
@@ -373,7 +635,7 @@ Table of Contents
    better security and privacy properties, by applying least privledge
    and minimal disclosure.
 
-5.2.  Confidentiality
+4.3.  Confidentiality
 
    All information should be considered sensitive, including timing,
    transmission metadata, the social graph that is built between
@@ -384,7 +646,7 @@ Table of Contents
    with cryptography appropriate for maintaining confidentiality for as
    long as is necessary to prevent harm.
 
-5.3.  Anonymity
+4.4.  Anonymity
 
    The act of observation changes the outcome, and character is what you
    do when nobody is watching.
@@ -399,7 +661,7 @@ Table of Contents
    When designing digital trust systems, implementers should be cautious
    to preserve anonymity when it is essential,
 
-5.4.  Authenticity
+4.5.  Authenticity
 
    Perhaps the most essential property of digital credentials is
    assuring that statements can be made unforgable.
@@ -416,7 +678,7 @@ Table of Contents
 
    See FIDO, etc...
 
-5.5.  Transparency
+4.6.  Transparency
 
    Transparency does not mean lack of confidentiality, it means
    commiting to be honest, in a way that dishonesty can be detected.
@@ -431,7 +693,7 @@ Table of Contents
    be mitigated, and the relying parties can be notified to protect
    their systems from cascading faults.
 
-5.6.  Accountability
+4.7.  Accountability
 
    Of the various credential roles, holders and subjects are most
    vulnerable, and have the least power or incentive to adopt digital
@@ -447,14 +709,14 @@ Table of Contents
    in terms of supporting the needs of holders, and challenged seek
    accountability to holders before all other parties.
 
-6.  Credential Workflows
+5.  Credential Workflows
 
    Credentials can be exchanged over differrent protocols.  In this
    section we outline a few exemplar exchange scenarios, however, this
    list is not exhaustive and some protocols might define additional
    variations on these examples.
 
-6.1.  Credential Delivery
+5.1.  Credential Delivery
 
    A subject will request a credential be created by an issuer, or an
    issuer will create a credential for a subject.
@@ -464,7 +726,7 @@ Table of Contents
 
    This workflow is commonly referred to as credential delivery.
 
-6.2.  Presentation Delivery
+5.2.  Presentation Delivery
 
    A holder will be challenged to present credentials to a verifier.
 
@@ -481,7 +743,7 @@ Table of Contents
    from the holder, and evaluate the nonce and other time related data
    to determine if the presentation is valid.
 
-6.3.  Credential Endorsement
+5.3.  Credential Endorsement
 
    Some holders may request a counter signature on an existing
    credential.
@@ -489,7 +751,7 @@ Table of Contents
    This can help convince a verifier who is not familiar with a given
    issuer.
 
-6.4.  Presentation Notarization
+5.4.  Presentation Notarization
 
    Some holders may request a receipt from a notary when making
    presentations.
@@ -497,7 +759,7 @@ Table of Contents
    This can help them prove that a notary, or intermediary offering
    notarization had accepted a presentaton in the past.
 
-7.  Credential Formats
+6.  Credential Formats
 
    A credential format combines a well known and popular serialization,
    such as JSON or CBOR, with a well known and popular securing
@@ -595,32 +857,32 @@ Table of Contents
    such as media types can be used to distinguish different kinds of
    statements and secure envelopes.
 
-7.1.  CBOR Web Tokens
+6.1.  CBOR Web Tokens
 
    CBOR Web Tokens are defined in [RFC8392] and extended to support
    selective disclosure in [I-D.prorock-cose-sd-cwt].
 
-7.2.  JSON Web Tokens
+6.2.  JSON Web Tokens
 
    JSON Web Tokens are defined in [RFC7519] and extended to support
    selective disclosure in [I-D.ietf-oauth-selective-disclosure-jwt].
 
-7.3.  CBOR Web Proofs
+6.3.  CBOR Web Proofs
 
    CBOR Web Proofs are defined in [I-D.ietf-jose-json-web-proof] and
    extended to support credentials in this specification.
 
-7.4.  JSON Web Proofs
+6.4.  JSON Web Proofs
 
    JSON Web Proofs are defined in [I-D.ietf-jose-json-web-proof] and
    extended to support credentials in this specification.
 
-7.5.  Transparency Tokens
+6.5.  Transparency Tokens
 
    Transparency Tokens build on lessons learned from deploying JWTs,
    CWTs and attribute certificates.
 
-7.5.1.  Opaque Payloads
+6.5.1.  Opaque Payloads
 
    A major structural difference between transparency tokens and
    previous token formats is the opacity of statements (the use of
@@ -645,21 +907,21 @@ Table of Contents
    be applied, this specification extends the related work to enable
    these capabilies over protected header metadata.
 
-7.5.2.  Detached Payloads
+6.5.2.  Detached Payloads
 
    Transparency Token also recommend support for detached payloads, this
    allows for easier integration with protocols that already transport
    well known content types, such as HTTP or file systems that support
    directory and file structures such as UNIX.
 
-7.5.3.  Redundant Claims
+6.5.3.  Redundant Claims
 
    In some cases, a JWT or CWT claim might be present in both the
    protected header and the payload.  This can lead to protocol
    confusion vulnerabilities.  The typ parameter MUST be used to
    distiniguish such tokens from similar looking tokens.
 
-7.5.4.  Key Discovery
+6.5.4.  Key Discovery
 
    Editors note: consider moving out of scope.
 
@@ -673,7 +935,7 @@ Table of Contents
    The following fields are commonly used to discovery verification
    material: iss, kid, jwk, cnf.
 
-7.5.5.  Mutable Claims
+6.5.5.  Mutable Claims
 
    The unprotected header provides a useful extension point, but
    requires careful consideration, due to the lack of built in integrity
@@ -689,7 +951,7 @@ Table of Contents
 
    *  providing proofs of knowledge
 
-7.5.6.  Entity Identifiers
+6.5.6.  Entity Identifiers
 
    JOSE and COSE have claims that are need to be text, but could be
    strings or URIs.
@@ -705,7 +967,7 @@ Table of Contents
    2.  other protected claims (kid and sub can be relative to iss, if
        your typ says so...)
 
-7.5.7.  Trusted Hardware
+6.5.7.  Trusted Hardware
 
    Application developers need the ability to communciate the assurances
    associated with a harware and software platform such as iOS and
@@ -720,7 +982,7 @@ Table of Contents
    credential store has the necessary security properties to hold high
    value credentials.
 
-7.5.8.  Architectural Alignment
+6.5.8.  Architectural Alignment
 
    Transparency Tokens require some consistency in functionality between
    JOSE and COSE.
@@ -734,12 +996,12 @@ Table of Contents
    In cases where a break in conventions needs to be made, Transparency
    Tokens prioritize CBOR / COSE over JSON / JOSE.
 
-7.5.8.1.  Unprotected headers
+6.5.8.1.  Unprotected headers
 
    JOSE Compact and JSON serializations have been extended to support an
    unprotected header.
 
-7.5.8.2.  Claims in headers
+6.5.8.2.  Claims in headers
 
    In JOSE, JWT claims go directly in the protected header.
 
@@ -764,14 +1026,14 @@ Table of Contents
 
                   Figure 5: Example COSE Claims in Headers
 
-7.5.8.3.  Fully Specified Algorithms
+6.5.8.3.  Fully Specified Algorithms
 
    Parametric algorithms MUST NOT be used.
 
    Algorithms MUST exist in both JOSE and COSE registries, and have the
    same security properties to be suitable for Transparency Tokens.
 
-8.  Credential Forms
+7.  Credential Forms
 
    In order to be a well recognized digital credential, there must be a
    specification defining the privacy and security properties of the
@@ -794,11 +1056,11 @@ Table of Contents
    by the format, and the privacy and security considerations associated
    with each form.
 
-8.1.  Issued Credential
+7.1.  Issued Credential
 
    This form is produced by an issuer and delivered to a holder.
 
-8.2.  Presented Credential
+7.2.  Presented Credential
 
    This form is prepared by a holder and delivered to a verifier.
 
@@ -809,11 +1071,11 @@ Table of Contents
    information commited to by the issuer, and possibly hides the
    identity of the subject in the process.
 
-9.  Privacy Considerations
+8.  Privacy Considerations
 
    TODO Privacy
 
-9.1.  Collection limitation of attributes by Verifiers
+8.1.  Collection limitation of attributes by Verifiers
 
    ## Holder consent for sending credential proofs to verifiers ##
    Unlinkability of credential proofs between Verifiers ##
@@ -821,11 +1083,11 @@ Table of Contents
    observability of both issued credentials and credential proofs ##
    Issuer anonymity among a set of Issuers
 
-10.  Security Considerations
+9.  Security Considerations
 
    TODO Security
 
-10.1.  Binding of an issued credential to the correct owner
+9.1.  Binding of an issued credential to the correct owner
 
    ## Verification by a Holder that an issued credential matches with an
    expected object structure ## Verification by a Verifier that a
@@ -836,13 +1098,13 @@ Table of Contents
    credential proof to the intended verifier ## Prevention of the
    forwarding of a credential proof by a verifier to another Verifier
 
-11.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-12.  References
+11.  References
 
-12.1.  Normative References
+11.1.  Normative References
 
    [I-D.ietf-cose-cwt-claims-in-headers]
               Looker, T. and M. B. Jones, "CBOR Web Token (CWT) Claims
@@ -855,16 +1117,16 @@ Table of Contents
               Steele, O., Birkholz, H., Delignat-Lavaud, A., and C.
               Fournet, "Concise Encoding of Signed Merkle Tree Proofs",
               Work in Progress, Internet-Draft, draft-ietf-cose-merkle-
-              tree-proofs-02, 17 November 2023,
+              tree-proofs-03, 11 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              merkle-tree-proofs-02>.
+              merkle-tree-proofs-03>.
 
    [I-D.ietf-cose-typ-header-parameter]
               Jones, M. B. and O. Steele, "COSE "typ" (type) Header
               Parameter", Work in Progress, Internet-Draft, draft-ietf-
-              cose-typ-header-parameter-01, 7 November 2023,
+              cose-typ-header-parameter-02, 8 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              typ-header-parameter-01>.
+              typ-header-parameter-02>.
 
    [I-D.ietf-jose-json-web-proof]
               Miller, J., Waite, D., and M. B. Jones, "JSON Web Proof",
@@ -883,9 +1145,9 @@ Table of Contents
    [I-D.ietf-oauth-selective-disclosure-jwt]
               Fett, D., Yasuda, K., and B. Campbell, "Selective
               Disclosure for JWTs (SD-JWT)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-selective-disclosure-jwt-06, 23
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-selective-disclosure-jwt-06>.
+              Draft, draft-ietf-oauth-selective-disclosure-jwt-07, 11
+              December 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-selective-disclosure-jwt-07>.
 
    [I-D.ietf-privacypass-architecture]
               Davidson, A., Iyengar, J., and C. A. Wood, "The Privacy
@@ -918,7 +1180,7 @@ Table of Contents
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
 
-12.2.  Informative References
+11.2.  Informative References
 
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
@@ -929,10 +1191,20 @@ Table of Contents
               RFC 5755, DOI 10.17487/RFC5755, January 2010,
               <https://www.rfc-editor.org/rfc/rfc5755>.
 
+   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, April 2010,
+              <https://www.rfc-editor.org/rfc/rfc5785>.
+
    [RFC8725]  Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
               Current Practices", BCP 225, RFC 8725,
               DOI 10.17487/RFC8725, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8725>.
+
+   [RFC9449]  Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
+              Jones, M., and D. Waite, "OAuth 2.0 Demonstrating Proof of
+              Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
+              September 2023, <https://www.rfc-editor.org/rfc/rfc9449>.
 
 Appendix A.  Examples
 
