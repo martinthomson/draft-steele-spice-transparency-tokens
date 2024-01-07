@@ -6,7 +6,7 @@ cat: std
 docname: draft-steele-transparency-tokens-latest
 stream: IETF
 number:
-date: 2023
+date:
 consensus: true
 area: "Security"
 keyword:
