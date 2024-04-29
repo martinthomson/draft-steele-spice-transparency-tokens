@@ -418,7 +418,7 @@ In order to verify credential proofs for this credential with identity binding, 
 - decode the protected header, and lookup the issuer identity document.
 - confirm the issuer's identity document is still valid according to the verifier's policy
   - check the validity period, ensure the credential is not activated in the future or expired in the past.
-  - check the status, in case the issuer of the issuer's identity docment has suspended or revoked the document.
+  - check the status, in case the identity document has been suspended or revoked by the issuer.
   - check the key used to sign the credential proof, is present in the issuer's identity document.
 - verify the credential proof with the issuer's public key, from their identity document.
   - decode the protected header, and validate the claims
